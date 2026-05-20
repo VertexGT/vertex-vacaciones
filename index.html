@@ -5,236 +5,298 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vertex Global Trade – Vacaciones</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
-  :root {
-    --teal:#2d7d8f;--teal-dark:#1f5f70;--teal-deep:#164655;
-    --teal-lite:#e8f4f6;--teal-mid:#b3d8df;
-    --bg:#f4f7f8;--surface:#fff;--border:#dce8eb;
-    --text:#1a2e33;--muted:#6b8f96;
-    --green:#27ae60;--green-bg:#eafaf1;
-    --yellow:#e6a817;--yellow-bg:#fef9e7;
-    --red:#c0392b;--red-bg:#fdedec;
-    --radius:14px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;min-height:100vh;}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
+:root {
+  --teal:#2d7d8f;--teal-dark:#1f5f70;--teal-deep:#164655;
+  --teal-lite:#e8f4f6;--teal-mid:#b3d8df;
+  --bg:#f4f7f8;--surface:#fff;--border:#dce8eb;
+  --text:#1a2e33;--muted:#6b8f96;
+  --green:#27ae60;--green-bg:#eafaf1;
+  --yellow:#e6a817;--yellow-bg:#fef9e7;
+  --red:#c0392b;--red-bg:#fdedec;
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;min-height:100vh;}
 
-  /* ── TOPBAR ── */
-  .topbar{background:var(--teal-deep);padding:0 36px;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow:0 2px 12px rgba(22,70,85,0.22);position:sticky;top:0;z-index:200;}
-  .logo-wrap{display:flex;align-items:center;gap:11px;}
-  .logo-img{width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(255,255,255,0.2);}
-  .logo-text{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;color:#fff;letter-spacing:1.5px;text-transform:uppercase;}
-  .logo-sub{font-size:9px;color:var(--teal-mid);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;}
-  .topbar-right{display:flex;align-items:center;gap:12px;}
-  .year-pill{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:5px 15px;font-size:12px;color:rgba(255,255,255,0.85);font-family:'Montserrat',sans-serif;font-weight:600;}
-  .sync-status{font-size:11px;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:5px;}
-  .sync-dot{width:7px;height:7px;border-radius:50%;background:#6b8f96;flex-shrink:0;}
-  .sync-dot.ok{background:#4ade80;}
-  .sync-dot.err{background:#f87171;}
-  .sync-dot.loading{background:var(--yellow);animation:pulse 1s infinite;}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+/* ── TOPBAR ── */
+.topbar{background:var(--teal-deep);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:60px;box-shadow:0 2px 12px rgba(22,70,85,0.22);}
+.logo-wrap{display:flex;align-items:center;gap:10px;}
+.logo-img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.2);}
+.logo-text{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#fff;letter-spacing:1.5px;text-transform:uppercase;}
+.logo-sub{font-size:9px;color:var(--teal-mid);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.user-info{font-size:12px;color:rgba(255,255,255,0.7);font-family:'Montserrat',sans-serif;}
+.user-email{color:#fff;font-weight:600;}
+.btn-logout{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);border-radius:8px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background 0.2s;}
+.btn-logout:hover{background:rgba(255,255,255,0.2);}
 
-  /* ── CONTENT ── */
-  .content{padding:28px 36px;max-width:1240px;margin:0 auto;}
+/* ── LOGIN PAGE ── */
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,var(--teal-deep) 0%,var(--teal) 100%);}
+.login-box{background:#fff;border-radius:20px;padding:36px 32px;width:100%;max-width:400px;box-shadow:0 24px 60px rgba(0,0,0,0.25);}
+.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px;}
+.login-logo img{width:44px;height:44px;border-radius:50%;object-fit:cover;}
+.login-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--teal-deep);text-transform:uppercase;letter-spacing:1px;}
+.login-subtitle{font-size:11px;color:var(--muted);margin-top:2px;}
+.login-h{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;color:var(--teal-deep);margin-bottom:6px;}
+.login-desc{font-size:13px;color:var(--muted);margin-bottom:24px;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.8px;font-family:'Montserrat',sans-serif;}
+.field input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-family:'Lato',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+.field input:focus{border-color:var(--teal);background:#fff;box-shadow:0 0 0 3px rgba(45,125,143,0.1);}
+.btn-main{width:100%;background:var(--teal);color:#fff;border:none;border-radius:10px;padding:12px;font-weight:700;font-size:14px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background 0.18s;margin-top:4px;}
+.btn-main:hover{background:var(--teal-dark);}
+.btn-main:disabled{opacity:0.6;cursor:not-allowed;}
+.login-link{text-align:center;margin-top:16px;font-size:13px;color:var(--muted);}
+.login-link a{color:var(--teal);font-weight:600;cursor:pointer;text-decoration:none;}
+.login-link a:hover{text-decoration:underline;}
+.msg-err{background:var(--red-bg);border:1px solid var(--red);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--red);margin-bottom:12px;display:none;}
+.msg-ok{background:var(--green-bg);border:1px solid var(--green);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--green);margin-bottom:12px;display:none;}
 
-  /* ── SETUP BANNER ── */
-  .setup-banner{background:#fff8e1;border:1.5px solid #f59e0b;border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;display:none;}
-  .setup-banner h3{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#92400e;margin-bottom:8px;}
-  .setup-banner p{font-size:13px;color:#78350f;line-height:1.6;}
-  .setup-banner input{width:100%;margin-top:10px;background:#fff;border:1.5px solid #f59e0b;border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Lato',sans-serif;outline:none;}
-  .setup-banner input:focus{border-color:#d97706;}
-  .setup-banner .btn-save-url{margin-top:8px;background:#f59e0b;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:700;font-size:13px;font-family:'Montserrat',sans-serif;cursor:pointer;}
+/* ── CONTENT ── */
+.content{padding:24px 28px;max-width:1200px;margin:0 auto;}
+.page{display:none;}
+.page.active{display:block;}
 
-  /* ── STATS ── */
-  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;}
-  .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;display:flex;align-items:center;gap:16px;box-shadow:0 1px 4px rgba(45,125,143,0.07);}
-  .stat-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;}
-  .stat-num{font-family:'Montserrat',sans-serif;font-size:30px;font-weight:800;line-height:1;margin-bottom:3px;}
-  .stat-label{font-size:11px;color:var(--muted);}
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:22px;}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 4px rgba(45,125,143,0.07);}
+.stat-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.stat-num{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:800;line-height:1;margin-bottom:3px;}
+.stat-label{font-size:11px;color:var(--muted);}
 
-  /* ── SECTION TITLE ── */
-  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-  .section-title{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
-  .btn-add-worker{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-weight:700;font-size:11px;font-family:'Montserrat',sans-serif;cursor:pointer;display:flex;align-items:center;gap:5px;transition:background 0.18s;}
-  .btn-add-worker:hover{background:var(--teal-dark);}
+/* ── SECTION ── */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;}
+.section-title{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
 
-  /* ── WORKER GRID ── */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:12px;margin-bottom:24px;}
-  .worker-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 18px;box-shadow:0 1px 4px rgba(45,125,143,0.06);transition:border-color 0.2s,box-shadow 0.2s;}
-  .worker-card:hover{border-color:var(--teal);box-shadow:0 4px 16px rgba(45,125,143,0.12);}
-  .worker-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-  .avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;flex-shrink:0;}
-  .worker-name{font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;}
-  .worker-role{font-size:11px;color:var(--muted);margin-top:2px;}
-  .worker-actions{display:flex;gap:5px;margin-left:auto;flex-shrink:0;}
-  .icon-btn{background:none;border:none;cursor:pointer;padding:4px;border-radius:6px;font-size:13px;color:var(--muted);transition:background 0.15s,color 0.15s;line-height:1;}
-  .icon-btn:hover.edit{background:var(--teal-lite);color:var(--teal);}
-  .icon-btn:hover.del{background:var(--red-bg);color:var(--red);}
-  .days-bar{height:5px;background:var(--teal-lite);border-radius:99px;overflow:hidden;margin-bottom:6px;}
-  .days-fill{height:100%;border-radius:99px;transition:width 0.5s ease;}
-  .days-text{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);}
-  .days-used{font-weight:700;}
+/* ── WORKER GRID ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:11px;margin-bottom:22px;}
+.worker-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:15px 17px;box-shadow:0 1px 4px rgba(45,125,143,0.06);transition:border-color 0.2s;}
+.worker-card:hover{border-color:var(--teal);}
+.worker-header{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;flex-shrink:0;}
+.worker-name{font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;}
+.worker-email{font-size:10px;color:var(--muted);margin-top:1px;}
+.worker-actions{display:flex;gap:4px;margin-left:auto;}
+.icon-btn{background:none;border:none;cursor:pointer;padding:4px;border-radius:5px;font-size:12px;color:var(--muted);transition:background 0.15s;}
+.icon-btn:hover{background:var(--teal-lite);color:var(--teal);}
+.icon-btn.del:hover{background:var(--red-bg);color:var(--red);}
+.days-bar{height:5px;background:var(--teal-lite);border-radius:99px;overflow:hidden;margin-bottom:6px;}
+.days-fill{height:100%;border-radius:99px;transition:width 0.4s;}
+.days-text{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);}
 
-  /* ── PANEL ── */
-  .panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;margin-bottom:16px;box-shadow:0 1px 4px rgba(45,125,143,0.06);}
-  .panel-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
-  .panel-title::before{content:'';display:block;width:4px;height:16px;background:var(--teal);border-radius:2px;}
-  .form-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;}
-  label{display:block;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.8px;font-family:'Montserrat',sans-serif;}
-  select,input[type="date"]{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:10px 12px;color:var(--text);font-family:'Lato',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
-  select:focus,input:focus{border-color:var(--teal);background:#fff;box-shadow:0 0 0 3px rgba(45,125,143,0.1);}
-  .btn{background:var(--teal);color:#fff;border:none;border-radius:9px;padding:10px 20px;font-weight:700;font-size:13px;cursor:pointer;font-family:'Montserrat',sans-serif;letter-spacing:0.3px;transition:background 0.18s,transform 0.1s;white-space:nowrap;}
-  .btn:hover{background:var(--teal-dark);}
-  .btn:active{transform:scale(0.97);}
-  .btn.sm{padding:5px 11px;font-size:10px;border-radius:7px;margin-right:3px;}
-  .btn.approve{background:var(--green-bg);color:var(--green);}
-  .btn.approve:hover{background:#d4efdf;}
-  .btn.reject-btn{background:var(--yellow-bg);color:var(--yellow);}
-  .btn.reject-btn:hover{background:#fde5b0;}
-  .btn.del{background:var(--red-bg);color:var(--red);}
-  .btn.del:hover{background:#f9cdc9;}
-  .err{font-size:12px;color:var(--red);margin-top:8px;display:none;}
+/* ── PANEL ── */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;margin-bottom:15px;box-shadow:0 1px 4px rgba(45,125,143,0.06);}
+.panel-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.panel-title::before{content:'';display:block;width:4px;height:15px;background:var(--teal);border-radius:2px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:11px;align-items:end;}
+.form-row.two{grid-template-columns:1fr 1fr auto;}
+label{display:block;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.8px;font-family:'Montserrat',sans-serif;}
+select,input[type="date"]{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:9px 11px;color:var(--text);font-family:'Lato',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+select:focus,input[type="date"]:focus{border-color:var(--teal);background:#fff;}
+.btn{background:var(--teal);color:#fff;border:none;border-radius:9px;padding:9px 18px;font-weight:700;font-size:12px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background 0.18s;white-space:nowrap;}
+.btn:hover{background:var(--teal-dark);}
+.btn.sm{padding:4px 10px;font-size:10px;border-radius:6px;margin-right:3px;}
+.btn.approve{background:var(--green-bg);color:var(--green);}
+.btn.approve:hover{background:#d4efdf;}
+.btn.rj{background:var(--yellow-bg);color:var(--yellow);}
+.btn.rj:hover{background:#fde5b0;}
+.btn.del{background:var(--red-bg);color:var(--red);}
+.btn.del:hover{background:#f9cdc9;}
+.btn.add-w{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:6px 13px;font-weight:700;font-size:11px;font-family:'Montserrat',sans-serif;cursor:pointer;display:flex;align-items:center;gap:4px;}
+.form-err{font-size:12px;color:var(--red);margin-top:7px;display:none;}
 
-  /* ── TABLE ── */
-  .filter-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;}
-  .filter-btns{display:flex;gap:7px;}
-  .filter-btn{background:var(--bg);border:1.5px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 14px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.18s;}
-  .filter-btn.active{border-color:var(--teal);color:var(--teal);background:var(--teal-lite);}
-  .export-wrap{display:flex;gap:8px;align-items:center;}
-  .entries-table{width:100%;border-collapse:collapse;font-size:13px;}
-  .entries-table th{text-align:left;padding:9px 13px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:2px solid var(--border);font-family:'Montserrat',sans-serif;font-weight:700;}
-  .entries-table td{padding:11px 13px;border-bottom:1px solid var(--border);vertical-align:middle;}
-  .entries-table tr:last-child td{border-bottom:none;}
-  .entries-table tbody tr:hover td{background:#f0f8fa;}
-  .tag{display:inline-block;padding:3px 10px;border-radius:99px;font-size:10px;font-weight:700;font-family:'Montserrat',sans-serif;}
-  .tag.approved{background:var(--green-bg);color:var(--green);}
-  .tag.pending{background:var(--yellow-bg);color:var(--yellow);}
-  .tag.rejected{background:var(--red-bg);color:var(--red);}
-  .name-cell{display:flex;align-items:center;gap:9px;}
-  .mini-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Montserrat',sans-serif;flex-shrink:0;}
-  .empty{text-align:center;padding:44px;color:var(--muted);font-size:13px;}
+/* ── MY DAYS BANNER ── */
+.my-days-banner{background:var(--teal-deep);border-radius:var(--r);padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;gap:20px;}
+.my-days-num{font-family:'Montserrat',sans-serif;font-size:42px;font-weight:800;color:var(--teal-mid);line-height:1;}
+.my-days-label{font-size:13px;color:rgba(255,255,255,0.7);}
+.my-days-name{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.my-days-bar-wrap{flex:1;}
+.my-bar-bg{height:8px;background:rgba(255,255,255,0.15);border-radius:99px;overflow:hidden;margin-top:10px;}
+.my-bar-fill{height:100%;border-radius:99px;background:var(--teal-mid);transition:width 0.5s;}
 
-  /* ── MODAL ── */
-  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;display:none;align-items:center;justify-content:center;}
-  .modal-bg.open{display:flex;}
-  .modal{background:#fff;border-radius:16px;padding:28px 32px;width:420px;max-width:95vw;box-shadow:0 20px 60px rgba(0,0,0,0.25);}
-  .modal h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:var(--teal-deep);margin-bottom:20px;}
-  .modal-field{margin-bottom:14px;}
-  .modal-field label{display:block;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px;font-family:'Montserrat',sans-serif;}
-  .modal-field input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:10px 13px;color:var(--text);font-family:'Lato',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s;}
-  .modal-field input:focus{border-color:var(--teal);background:#fff;}
-  .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;}
-  .btn-cancel{background:var(--bg);color:var(--muted);border:1.5px solid var(--border);border-radius:9px;padding:9px 18px;font-weight:600;font-size:13px;cursor:pointer;font-family:'Montserrat',sans-serif;}
-  .btn-cancel:hover{border-color:var(--muted);}
+/* ── TABLE ── */
+.filter-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;flex-wrap:wrap;gap:9px;}
+.filter-btns{display:flex;gap:7px;}
+.filter-btn{background:var(--bg);border:1.5px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 13px;font-size:10px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.18s;}
+.filter-btn.active{border-color:var(--teal);color:var(--teal);background:var(--teal-lite);}
+.entries-table{width:100%;border-collapse:collapse;font-size:12px;}
+.entries-table th{text-align:left;padding:8px 12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:2px solid var(--border);font-family:'Montserrat',sans-serif;font-weight:700;}
+.entries-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.entries-table tr:last-child td{border-bottom:none;}
+.entries-table tbody tr:hover td{background:#f0f8fa;}
+.tag{display:inline-block;padding:3px 9px;border-radius:99px;font-size:9px;font-weight:700;font-family:'Montserrat',sans-serif;}
+.tag.approved{background:var(--green-bg);color:var(--green);}
+.tag.pending{background:var(--yellow-bg);color:var(--yellow);}
+.tag.rejected{background:var(--red-bg);color:var(--red);}
+.name-cell{display:flex;align-items:center;gap:8px;}
+.mini-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:'Montserrat',sans-serif;flex-shrink:0;}
+.empty{text-align:center;padding:40px;color:var(--muted);font-size:13px;}
 
-  /* ── LOADING ── */
-  .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px;}
-  @keyframes spin{to{transform:rotate(360deg)}}
-
-  @media(max-width:750px){.content{padding:16px;}.form-row{grid-template-columns:1fr 1fr;}.stats-row{grid-template-columns:1fr;}.topbar{padding:0 16px;}}
+/* ── MODAL ── */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;display:none;align-items:center;justify-content:center;}
+.modal-bg.open{display:flex;}
+.modal{background:#fff;border-radius:16px;padding:26px 28px;width:400px;max-width:94vw;box-shadow:0 20px 60px rgba(0,0,0,0.25);}
+.modal h3{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:var(--teal-deep);margin-bottom:18px;}
+.modal-field{margin-bottom:12px;}
+.modal-field label{display:block;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.8px;font-family:'Montserrat',sans-serif;}
+.modal-field input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:10px 12px;color:var(--text);font-family:'Lato',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+.modal-field input:focus{border-color:var(--teal);background:#fff;}
+.modal-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:18px;}
+.btn-cancel{background:var(--bg);color:var(--muted);border:1.5px solid var(--border);border-radius:9px;padding:8px 16px;font-weight:600;font-size:12px;cursor:pointer;font-family:'Montserrat',sans-serif;}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:5px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sync-status{font-size:11px;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:5px;}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:#6b8f96;flex-shrink:0;}
+.sync-dot.ok{background:#4ade80;}
+.sync-dot.err{background:#f87171;}
+.sync-dot.loading{background:var(--yellow);animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@media(max-width:700px){.content{padding:14px;}.form-row{grid-template-columns:1fr 1fr;}.stats-row{grid-template-columns:1fr;}.topbar{padding:0 14px;}}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="logo-wrap">
-    <img class="logo-img" src="data:image/jpeg;base64,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" alt="Vertex">
-    <div>
-      <div class="logo-text">Vertex</div>
-      <div class="logo-sub">Global Trade</div>
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="login-page">
+  <div class="login-box" id="loginBox">
+    <div class="login-logo">
+      <img src="data:image/jpeg;base64,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" alt="Vertex">
+      <div>
+        <div class="login-title">Vertex Global Trade</div>
+        <div class="login-subtitle">Sistema de Gestión de Vacaciones</div>
+      </div>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div id="formLogin">
+      <div class="login-h">Bienvenido</div>
+      <div class="login-desc">Accede con tu email corporativo</div>
+      <div class="msg-err" id="loginErr"></div>
+      <div class="field"><label>Email corporativo</label><input type="email" id="loginEmail" placeholder="tu@vertexglobaltrade.com" autocomplete="email"></div>
+      <div class="field"><label>Contraseña</label><input type="password" id="loginPass" placeholder="Tu contraseña" autocomplete="current-password"></div>
+      <button class="btn-main" id="btnLogin" onclick="doLogin()">Entrar</button>
+      <div class="login-link"><a onclick="showForm('first')">Primera vez aquí · Crear contraseña</a></div>
+    </div>
+
+    <!-- FIRST TIME FORM -->
+    <div id="formFirst" style="display:none">
+      <div class="login-h">Primera vez</div>
+      <div class="login-desc">Te enviaremos un enlace para crear tu contraseña</div>
+      <div class="msg-err" id="firstErr"></div>
+      <div class="msg-ok" id="firstOk"></div>
+      <div class="field"><label>Tu email corporativo</label><input type="email" id="firstEmail" placeholder="tu@vertexglobaltrade.com"></div>
+      <button class="btn-main" id="btnFirst" onclick="doRequestPassword()">Enviar enlace</button>
+      <div class="login-link"><a onclick="showForm('login')">← Volver al login</a></div>
+    </div>
+
+    <!-- SET PASSWORD FORM -->
+    <div id="formSetPass" style="display:none">
+      <div class="login-h">Crea tu contraseña</div>
+      <div class="login-desc">Elige una contraseña segura (mínimo 6 caracteres)</div>
+      <div class="msg-err" id="setPassErr"></div>
+      <div class="msg-ok" id="setPassOk"></div>
+      <div class="field"><label>Nueva contraseña</label><input type="password" id="newPass1" placeholder="Mínimo 6 caracteres"></div>
+      <div class="field"><label>Repite la contraseña</label><input type="password" id="newPass2" placeholder="Repite la contraseña"></div>
+      <button class="btn-main" id="btnSetPass" onclick="doSetPassword()">Guardar contraseña</button>
     </div>
   </div>
-  <div class="topbar-right">
-    <div class="sync-status"><div class="sync-dot" id="syncDot"></div><span id="syncLabel">Conectando...</span></div>
-    <div class="year-pill">Año <span id="currentYear"></span> · 22 días/persona</div>
-  </div>
 </div>
 
-<!-- SETUP BANNER -->
-<div class="content">
-<div class="setup-banner" id="setupBanner">
-  <h3>⚙️ Configuración necesaria</h3>
-  <p>Pega aquí la URL de tu Web App de Google Apps Script para conectar con Google Sheets. Solo hay que hacerlo una vez.</p>
-  <input type="text" id="urlInput" placeholder="https://script.google.com/macros/s/.../exec">
-  <br><button class="btn-save-url" onclick="saveUrl()">Guardar y conectar</button>
-</div>
-
-<!-- STATS -->
-<div class="stats-row">
-  <div class="stat-card">
-    <div class="stat-icon" style="background:var(--teal-lite)">📅</div>
-    <div><div class="stat-num" id="statTotal" style="color:var(--teal)">—</div><div class="stat-label">Días solicitados este año</div></div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon" style="background:var(--green-bg)">✅</div>
-    <div><div class="stat-num" id="statApproved" style="color:var(--green)">—</div><div class="stat-label">Días aprobados</div></div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-icon" style="background:var(--yellow-bg)">⏳</div>
-    <div><div class="stat-num" id="statPending" style="color:var(--yellow)">—</div><div class="stat-label">Días pendientes de aprobar</div></div>
-  </div>
-</div>
-
-<!-- WORKERS -->
-<div class="section-header">
-  <div class="section-title">Equipo · Estado de vacaciones</div>
-  <button class="btn-add-worker" onclick="openModal('add')">+ Añadir trabajador</button>
-</div>
-<div class="grid" id="workersGrid"></div>
-
-<!-- ADD ENTRY PANEL -->
-<div class="panel">
-  <div class="panel-title">Registrar vacaciones</div>
-  <div class="form-row">
-    <div><label>Trabajador</label><select id="selWorker"></select></div>
-    <div><label>Fecha inicio</label><input type="date" id="dateStart"></div>
-    <div><label>Fecha fin</label><input type="date" id="dateEnd"></div>
-    <div><button class="btn" id="btnAdd" onclick="addEntry()">+ Añadir</button></div>
-  </div>
-  <div class="err" id="addMsg"></div>
-</div>
-
-<!-- HISTORY PANEL -->
-<div class="panel">
-  <div class="panel-title">Historial de vacaciones</div>
-  <div class="filter-row">
-    <div class="filter-btns">
-      <button class="filter-btn active" onclick="setFilter('all',this)">Todos</button>
-      <button class="filter-btn" onclick="setFilter('pending',this)">Pendientes</button>
-      <button class="filter-btn" onclick="setFilter('approved',this)">Aprobadas</button>
-      <button class="filter-btn" onclick="setFilter('rejected',this)">Rechazadas</button>
+<!-- APP -->
+<div id="appPage" style="display:none">
+  <div class="topbar">
+    <div class="logo-wrap">
+      <img class="logo-img" src="data:image/jpeg;base64,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" alt="Vertex">
+      <div><div class="logo-text">Vertex</div><div class="logo-sub">Global Trade</div></div>
     </div>
-    <div class="export-wrap">
-      <select id="exportWorker" style="padding:7px 11px;font-size:12px;border-radius:8px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;outline:none;"></select>
-      <button class="btn" style="padding:8px 16px;font-size:12px" onclick="exportPDF()">⬇ Exportar PDF</button>
+    <div class="topbar-right">
+      <div class="sync-status"><div class="sync-dot" id="syncDot"></div><span id="syncLabel">Cargando...</span></div>
+      <div class="user-info">Hola, <span class="user-email" id="topEmail"></span></div>
+      <button class="btn-logout" onclick="doLogout()">Cerrar sesión</button>
     </div>
   </div>
-  <table class="entries-table">
-    <thead><tr><th>Trabajador</th><th>Inicio</th><th>Fin</th><th>Días lab.</th><th>Estado</th><th>Acciones</th></tr></thead>
-    <tbody id="entriesBody"></tbody>
-  </table>
-  <div class="empty" id="emptyMsg" style="display:none">No hay registros para este filtro.</div>
-</div>
+
+  <div class="content">
+    <!-- ADMIN VIEW -->
+    <div id="adminView" class="page">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-icon" style="background:var(--teal-lite)">📅</div><div><div class="stat-num" id="statTotal" style="color:var(--teal)">0</div><div class="stat-label">Días solicitados este año</div></div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:var(--green-bg)">✅</div><div><div class="stat-num" id="statApproved" style="color:var(--green)">0</div><div class="stat-label">Días aprobados</div></div></div>
+        <div class="stat-card"><div class="stat-icon" style="background:var(--yellow-bg)">⏳</div><div><div class="stat-num" id="statPending" style="color:var(--yellow)">0</div><div class="stat-label">Pendientes de aprobar</div></div></div>
+      </div>
+      <div class="section-header">
+        <div class="section-title">Equipo · Estado de vacaciones</div>
+        <button class="btn add-w" onclick="openWorkerModal('add')">+ Añadir trabajador</button>
+      </div>
+      <div class="grid" id="workersGrid"></div>
+      <div class="panel">
+        <div class="panel-title">Historial de vacaciones</div>
+        <div class="filter-row">
+          <div class="filter-btns">
+            <button class="filter-btn active" onclick="setFilter('all',this)">Todos</button>
+            <button class="filter-btn" onclick="setFilter('pending',this)">Pendientes</button>
+            <button class="filter-btn" onclick="setFilter('approved',this)">Aprobadas</button>
+            <button class="filter-btn" onclick="setFilter('rejected',this)">Rechazadas</button>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <select id="exportWorker" style="padding:6px 10px;font-size:11px;border-radius:7px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;outline:none;"></select>
+            <button class="btn" style="padding:7px 14px;font-size:11px" onclick="exportPDF()">⬇ PDF</button>
+          </div>
+        </div>
+        <table class="entries-table"><thead><tr><th>Trabajador</th><th>Inicio</th><th>Fin</th><th>Días</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="adminEntriesBody"></tbody></table>
+        <div class="empty" id="adminEmpty" style="display:none">No hay registros para este filtro.</div>
+      </div>
+    </div>
+
+    <!-- WORKER VIEW -->
+    <div id="workerView" class="page">
+      <div class="my-days-banner">
+        <div><div class="my-days-num" id="myDaysUsed">0</div><div class="my-days-label">días usados</div></div>
+        <div class="my-days-bar-wrap">
+          <div class="my-days-name" id="myName"></div>
+          <div class="my-days-label" id="myDaysLeft"></div>
+          <div class="my-bar-bg"><div class="my-bar-fill" id="myBarFill" style="width:0%"></div></div>
+        </div>
+        <div style="text-align:right"><div style="font-family:Montserrat,sans-serif;font-size:11px;color:rgba(255,255,255,0.6)">Año <span id="myYear"></span></div><div style="font-family:Montserrat,sans-serif;font-size:22px;font-weight:800;color:var(--teal-mid)" id="myDaysTotal">22</div><div style="font-size:11px;color:rgba(255,255,255,0.6)">días totales</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Solicitar vacaciones</div>
+        <div class="form-row two">
+          <div><label>Fecha inicio</label><input type="date" id="myStart"></div>
+          <div><label>Fecha fin</label><input type="date" id="myEnd"></div>
+          <div><button class="btn" id="btnMyAdd" onclick="addMyEntry()" style="margin-top:0">Solicitar</button></div>
+        </div>
+        <div class="form-err" id="myErr"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Mis solicitudes</div>
+        <table class="entries-table"><thead><tr><th>Inicio</th><th>Fin</th><th>Días</th><th>Estado</th><th></th></tr></thead><tbody id="myEntriesBody"></tbody></table>
+        <div class="empty" id="myEmpty" style="display:none">No tienes solicitudes aún.</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- WORKER MODAL -->
-<div class="modal-bg" id="modalBg">
+<div class="modal-bg" id="workerModal">
   <div class="modal">
-    <h3 id="modalTitle">Añadir trabajador</h3>
-    <div class="modal-field"><label>Nombre</label><input type="text" id="modalName" placeholder="Nombre completo"></div>
-    <div class="modal-field"><label>Rol / Puesto</label><input type="text" id="modalRole" placeholder="Ej: Account Manager"></div>
+    <h3 id="workerModalTitle">Añadir trabajador</h3>
+    <div class="modal-field"><label>Nombre completo</label><input type="text" id="wModalName" placeholder="Nombre Apellido"></div>
+    <div class="modal-field"><label>Email corporativo</label><input type="email" id="wModalEmail" placeholder="nombre@vertexglobaltrade.com"></div>
     <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
-      <button class="btn" id="modalSaveBtn" onclick="saveWorker()">Guardar</button>
+      <button class="btn-cancel" onclick="closeWorkerModal()">Cancelar</button>
+      <button class="btn" id="wModalSave" onclick="saveWorker()">Guardar</button>
     </div>
   </div>
 </div>
 
 <script>
+// ── CONFIG ────────────────────────────────────────────────
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxkb643V3HVde1B95yyTzvGxkwi8vUMkRTWjNPDe0-lbbspatQYnVP_Fs2Nv7KDrwqyuA/exec';
 const DAYS_PER_YEAR = 22;
+const ADMIN_EMAIL = 'info@vertexglobaltrade.com';
 const currentYear = new Date().getFullYear();
-document.getElementById('currentYear').textContent = currentYear;
 
 const COLORS = [
   {bg:'#d4edf1',text:'#1f5f70'},{bg:'#c0e5eb',text:'#164655'},
@@ -243,300 +305,359 @@ const COLORS = [
   {bg:'#e2f2f5',text:'#2a7080'},{bg:'#e8f4f6',text:'#2d7d8f'},
 ];
 
-let WEB_APP_URL = localStorage.getItem('vertex_url') || 'https://script.google.com/macros/s/AKfycbxkb643V3HVde1B95yyTzvGxkwi8vUMkRTWjNPDe0-lbbspatQYnVP_Fs2Nv7KDrwqyuA/exec';
-let workers = [];
-let entries = [];
-let currentFilter = 'all';
-let editingWorkerId = null;
-
-// ── URL SETUP ──────────────────────────────────────────────
-function saveUrl() {
-  const url = document.getElementById('urlInput').value.trim();
-  if (!url.startsWith('https://script.google.com')) {
-    alert('URL inválida. Debe ser de Google Apps Script.');
-    return;
-  }
-  WEB_APP_URL = url;
-  localStorage.setItem('vertex_url', url);
-  document.getElementById('setupBanner').style.display = 'none';
-  loadAll();
-}
-
-// ── SYNC STATUS ────────────────────────────────────────────
-function setSyncStatus(state, label) {
-  const dot = document.getElementById('syncDot');
-  dot.className = 'sync-dot ' + state;
-  document.getElementById('syncLabel').textContent = label;
-}
-
-// ── API CALLS ──────────────────────────────────────────────
-async function apiGet(params) {
-  const url = WEB_APP_URL + '?' + new URLSearchParams(params);
-  const res = await fetch(url);
-  return res.json();
-}
-
-async function apiPost(body) {
-  const res = await fetch(WEB_APP_URL, {
-    method: 'POST',
-    body: JSON.stringify(body)
-  });
-  return res.json();
-}
-
-async function loadAll() {
-  if (!WEB_APP_URL) return;
-  setSyncStatus('loading', 'Cargando...');
-  try {
-    const data = await apiGet({ action: 'getAll' });
-    workers = data.workers || [];
-    entries = (data.entries || []).map(e => ({...e, days: Number(e.days)}));
-    render();
-    setSyncStatus('ok', 'Sincronizado');
-  } catch(err) {
-    setSyncStatus('err', 'Error de conexión');
-  }
-}
+let session = JSON.parse(localStorage.getItem('vgt_session') || 'null');
+let workers = [], entries = [], currentFilter = 'all', editingWId = null;
+let myWorker = null, myEntries = [];
 
 // ── HELPERS ───────────────────────────────────────────────
-function ini(n) { return (n||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(); }
-function col(id) { return COLORS[Math.abs(Number(id)-1) % COLORS.length]; }
-function fmt(d) {
-  if (!d) return '—';
-  const s = typeof d === 'string' ? d.substring(0,10) : d;
-  return new Date(s+'T12:00:00').toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'});
+function ini(n){return (n||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
+function col(email){const h=Array.from(email||'').reduce((a,c)=>a+c.charCodeAt(0),0);return COLORS[h%COLORS.length];}
+function fmt(d){if(!d)return'—';try{return new Date(String(d).substring(0,10)+'T12:00:00').toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'});}catch(e){return d;}}
+function businessDays(s,e){let n=0,c=new Date(s),l=new Date(e);while(c<=l){const d=c.getDay();if(d&&d!==6)n++;c.setDate(c.getDate()+1);}return n;}
+function daysUsed(email){return entries.filter(e=>String(e.workerEmail).toLowerCase()===email.toLowerCase()&&e.status!=='rejected'&&new Date(e.start).getFullYear()===currentYear).reduce((s,e)=>s+Number(e.days),0);}
+function setSyncStatus(state,label){document.getElementById('syncDot').className='sync-dot '+state;document.getElementById('syncLabel').textContent=label;}
+
+async function api(params){
+  const url=WEB_APP_URL+'?'+new URLSearchParams({...params,token:session?.token||''});
+  const res=await fetch(url);return res.json();
+}
+async function apiPost(body){
+  const res=await fetch(WEB_APP_URL,{method:'POST',body:JSON.stringify({...body,token:session?.token||''})});
+  return res.json();
 }
 
-function businessDays(start, end) {
-  let n=0, cur=new Date(start), last=new Date(end);
-  while(cur<=last){const d=cur.getDay();if(d&&d!==6)n++;cur.setDate(cur.getDate()+1);}
-  return n;
+// ── LOGIN FORMS ───────────────────────────────────────────
+function showForm(f){
+  ['formLogin','formFirst','formSetPass'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('form'+f.charAt(0).toUpperCase()+f.slice(1)).style.display='block';
 }
 
-function daysUsed(wid) {
-  return entries
-    .filter(e=>String(e.wid)===String(wid)&&e.status!=='rejected'&&new Date(e.start).getFullYear()===currentYear)
-    .reduce((s,e)=>s+e.days,0);
+function showErr(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';}
+function showOk(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';}
+function hideMsg(id){document.getElementById(id).style.display='none';}
+
+async function doLogin(){
+  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass=document.getElementById('loginPass').value;
+  if(!email||!pass){showErr('loginErr','Introduce email y contraseña.');return;}
+  const btn=document.getElementById('btnLogin');
+  btn.innerHTML='<span class="spinner"></span>Entrando...';btn.disabled=true;
+  hideMsg('loginErr');
+  try{
+    const res=await apiPost({action:'login',email,password:pass});
+    if(res.ok){
+      session={token:res.token,email:res.email,isAdmin:res.isAdmin};
+      localStorage.setItem('vgt_session',JSON.stringify(session));
+      startApp();
+    } else {
+      showErr('loginErr',res.error||'Error al iniciar sesión');
+    }
+  }catch(e){showErr('loginErr','Error de conexión. Inténtalo de nuevo.');}
+  btn.innerHTML='Entrar';btn.disabled=false;
 }
 
-// ── RENDER ─────────────────────────────────────────────────
-function renderWorkers() {
-  const g = document.getElementById('workersGrid');
-  if (!workers.length) { g.innerHTML = '<div class="empty">No hay trabajadores. Añade el primero.</div>'; return; }
-  g.innerHTML = workers.map(w => {
-    const used = daysUsed(w.id);
-    const pct  = Math.min(100,(used/DAYS_PER_YEAR)*100);
-    const c    = col(w.id);
-    const bar  = pct>=90?'var(--red)':pct>=70?'var(--yellow)':'var(--teal)';
+async function doRequestPassword(){
+  const email=document.getElementById('firstEmail').value.trim().toLowerCase();
+  if(!email){showErr('firstErr','Introduce tu email.');return;}
+  const btn=document.getElementById('btnFirst');
+  btn.innerHTML='<span class="spinner"></span>Enviando...';btn.disabled=true;
+  hideMsg('firstErr');hideMsg('firstOk');
+  try{
+    const res=await apiPost({action:'requestPasswordSetup',email});
+    if(res.ok){
+      showOk('firstOk','¡Email enviado! Revisa tu bandeja de entrada y sigue el enlace.');
+    } else {
+      showErr('firstErr',res.error||'Error al enviar el email');
+    }
+  }catch(e){showErr('firstErr','Error de conexión.');}
+  btn.innerHTML='Enviar enlace';btn.disabled=false;
+}
+
+async function doSetPassword(){
+  const p1=document.getElementById('newPass1').value;
+  const p2=document.getElementById('newPass2').value;
+  if(p1.length<6){showErr('setPassErr','La contraseña debe tener al menos 6 caracteres.');return;}
+  if(p1!==p2){showErr('setPassErr','Las contraseñas no coinciden.');return;}
+  const params=new URLSearchParams(window.location.search);
+  const email=params.get('email'),token=params.get('token');
+  const btn=document.getElementById('btnSetPass');
+  btn.innerHTML='<span class="spinner"></span>Guardando...';btn.disabled=true;
+  hideMsg('setPassErr');
+  try{
+    const res=await apiPost({action:'setPassword',email,token,password:p1});
+    if(res.ok){
+      showOk('setPassOk','¡Contraseña creada! Ya puedes iniciar sesión.');
+      setTimeout(()=>{window.history.replaceState({},'',window.location.pathname);showForm('login');},2000);
+    } else {
+      showErr('setPassErr',res.error||'Error al guardar la contraseña');
+    }
+  }catch(e){showErr('setPassErr','Error de conexión.');}
+  btn.innerHTML='Guardar contraseña';btn.disabled=false;
+}
+
+async function doLogout(){
+  try{await apiPost({action:'logout'});}catch(e){}
+  localStorage.removeItem('vgt_session');
+  session=null;
+  document.getElementById('appPage').style.display='none';
+  document.getElementById('loginPage').style.display='flex';
+  showForm('login');
+}
+
+// ── APP INIT ─────────────────────────────────────────────
+async function startApp(){
+  document.getElementById('loginPage').style.display='none';
+  document.getElementById('appPage').style.display='block';
+  document.getElementById('topEmail').textContent=session.email;
+  document.getElementById('myYear').textContent=currentYear;
+  if(session.isAdmin){
+    document.getElementById('adminView').classList.add('active');
+    await loadAdminData();
+  } else {
+    document.getElementById('workerView').classList.add('active');
+    await loadWorkerData();
+  }
+}
+
+async function loadAdminData(){
+  setSyncStatus('loading','Cargando...');
+  try{
+    const data=await api({action:'getAll'});
+    workers=data.workers||[];
+    entries=(data.entries||[]).map(e=>({...e,days:Number(e.days)}));
+    renderAdmin();
+    setSyncStatus('ok','Sincronizado');
+  }catch(e){setSyncStatus('err','Error de conexión');}
+}
+
+async function loadWorkerData(){
+  setSyncStatus('loading','Cargando...');
+  try{
+    const data=await api({action:'getMyData'});
+    myWorker=data.worker;
+    myEntries=(data.entries||[]).map(e=>({...e,days:Number(e.days)}));
+    renderWorker();
+    setSyncStatus('ok','Sincronizado');
+  }catch(e){setSyncStatus('err','Error de conexión');}
+}
+
+// ── ADMIN RENDER ──────────────────────────────────────────
+function renderAdmin(){renderWorkerGrid();renderAdminEntries();renderAdminStats();renderExportSelect();}
+
+function renderWorkerGrid(){
+  const g=document.getElementById('workersGrid');
+  if(!workers.length){g.innerHTML='<div class="empty">No hay trabajadores.</div>';return;}
+  g.innerHTML=workers.map(w=>{
+    const used=daysUsed(w.email),pct=Math.min(100,(used/DAYS_PER_YEAR)*100);
+    const c=col(w.email),bar=pct>=90?'var(--red)':pct>=70?'var(--yellow)':'var(--teal)';
     return `<div class="worker-card">
       <div class="worker-header">
         <div class="avatar" style="background:${c.bg};color:${c.text}">${ini(w.name)}</div>
-        <div style="flex:1;min-width:0">
-          <div class="worker-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${w.name}</div>
-          <div class="worker-role">${w.role||''}</div>
-        </div>
+        <div style="flex:1;min-width:0"><div class="worker-name" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${w.name}</div><div class="worker-email">${w.email}</div></div>
         <div class="worker-actions">
-          <button class="icon-btn edit" title="Editar" onclick="openModal('edit',${w.id})">✏️</button>
-          <button class="icon-btn del" title="Eliminar" onclick="deleteWorker(${w.id})">🗑️</button>
+          <button class="icon-btn" title="Editar" onclick="openWorkerModal('edit','${w.id}')">✏️</button>
+          <button class="icon-btn del" title="Eliminar" onclick="delWorker('${w.id}')">🗑️</button>
         </div>
       </div>
       <div class="days-bar"><div class="days-fill" style="width:${pct}%;background:${bar}"></div></div>
-      <div class="days-text">
-        <span><span class="days-used" style="color:${bar}">${used}</span> días usados</span>
-        <span style="color:var(--teal-dark);font-weight:700">${DAYS_PER_YEAR-used} restantes</span>
-      </div>
+      <div class="days-text"><span><b style="color:${bar}">${used}</b> días usados</span><span style="color:var(--teal-dark);font-weight:700">${DAYS_PER_YEAR-used} restantes</span></div>
     </div>`;
   }).join('');
 }
 
-function renderSelects() {
-  const opts = workers.map(w=>`<option value="${w.id}">${w.name}</option>`).join('');
-  document.getElementById('selWorker').innerHTML = opts;
-  document.getElementById('exportWorker').innerHTML = '<option value="0">— Todos los trabajadores —</option>' + opts;
+function renderAdminStats(){
+  const yr=entries.filter(e=>new Date(e.start).getFullYear()===currentYear);
+  document.getElementById('statTotal').textContent=yr.reduce((s,e)=>s+e.days,0);
+  document.getElementById('statApproved').textContent=yr.filter(e=>e.status==='approved').reduce((s,e)=>s+e.days,0);
+  document.getElementById('statPending').textContent=yr.filter(e=>e.status==='pending').reduce((s,e)=>s+e.days,0);
 }
 
-function renderEntries() {
-  const tbody = document.getElementById('entriesBody');
-  const empty = document.getElementById('emptyMsg');
-  const lbl   = {pending:'Pendiente',approved:'Aprobada',rejected:'Rechazada'};
-  let list = currentFilter==='all' ? entries : entries.filter(e=>e.status===currentFilter);
-  list = [...list].reverse();
-  if (!list.length) { tbody.innerHTML=''; empty.style.display='block'; return; }
+function renderExportSelect(){
+  const sel=document.getElementById('exportWorker');
+  sel.innerHTML='<option value="0">— Todos —</option>'+workers.map(w=>`<option value="${w.email}">${w.name}</option>`).join('');
+}
+
+function renderAdminEntries(){
+  const tbody=document.getElementById('adminEntriesBody'),empty=document.getElementById('adminEmpty');
+  const lbl={pending:'Pendiente',approved:'Aprobada',rejected:'Rechazada'};
+  let list=currentFilter==='all'?entries:entries.filter(e=>e.status===currentFilter);
+  list=[...list].reverse();
+  if(!list.length){tbody.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
-  tbody.innerHTML = list.map(e => {
-    const w = workers.find(w=>String(w.id)===String(e.wid)) || {name:'?',id:0};
-    const c = col(w.id);
-    const ap = e.status!=='approved' ? `<button class="btn sm approve" onclick="chgStatus('${e.id}','approved')">✓ Aprobar</button>` : '';
-    const rj = e.status!=='rejected' ? `<button class="btn sm reject-btn" onclick="chgStatus('${e.id}','rejected')">✗ Rechazar</button>` : '';
-    const dl = `<button class="btn sm del" onclick="delEntry('${e.id}')">Borrar</button>`;
-    return `<tr>
-      <td><div class="name-cell"><div class="mini-avatar" style="background:${c.bg};color:${c.text}">${ini(w.name)}</div>${w.name}</div></td>
-      <td>${fmt(e.start)}</td><td>${fmt(e.end)}</td>
-      <td><strong>${e.days}</strong></td>
-      <td><span class="tag ${e.status}">${lbl[e.status]||e.status}</span></td>
-      <td>${ap}${rj}${dl}</td>
-    </tr>`;
+  tbody.innerHTML=list.map(e=>{
+    const w=workers.find(w=>String(w.email).toLowerCase()===String(e.workerEmail).toLowerCase())||{name:e.workerEmail,email:e.workerEmail};
+    const c=col(w.email);
+    const ap=e.status!=='approved'?`<button class="btn sm approve" onclick="chgStatus('${e.id}','approved')">✓</button>`:'';
+    const rj=e.status!=='rejected'?`<button class="btn sm rj" onclick="chgStatus('${e.id}','rejected')">✗</button>`:'';
+    const dl=`<button class="btn sm del" onclick="delEntry('${e.id}')">🗑</button>`;
+    return `<tr><td><div class="name-cell"><div class="mini-av" style="background:${c.bg};color:${c.text}">${ini(w.name)}</div>${w.name}</div></td><td>${fmt(e.start)}</td><td>${fmt(e.end)}</td><td><b>${e.days}</b></td><td><span class="tag ${e.status}">${lbl[e.status]||e.status}</span></td><td>${ap}${rj}${dl}</td></tr>`;
   }).join('');
 }
 
-function renderStats() {
-  const yr = entries.filter(e=>new Date(e.start).getFullYear()===currentYear);
-  document.getElementById('statTotal').textContent    = yr.reduce((s,e)=>s+e.days,0);
-  document.getElementById('statApproved').textContent = yr.filter(e=>e.status==='approved').reduce((s,e)=>s+e.days,0);
-  document.getElementById('statPending').textContent  = yr.filter(e=>e.status==='pending').reduce((s,e)=>s+e.days,0);
-}
-
-function render() { renderWorkers(); renderSelects(); renderEntries(); renderStats(); }
-
-// ── ENTRIES ────────────────────────────────────────────────
-async function addEntry() {
-  const msg = document.getElementById('addMsg'); msg.style.display='none';
-  const wid   = document.getElementById('selWorker').value;
-  const start = document.getElementById('dateStart').value;
-  const end   = document.getElementById('dateEnd').value;
-  if (!wid) { msg.textContent='Selecciona un trabajador.'; msg.style.display='block'; return; }
-  if (!start||!end){ msg.textContent='Introduce fecha de inicio y fin.'; msg.style.display='block'; return; }
-  if (start>end){ msg.textContent='La fecha inicio no puede ser posterior al fin.'; msg.style.display='block'; return; }
-  const days = businessDays(start,end);
-  const used = daysUsed(wid);
-  const w = workers.find(w=>String(w.id)===String(wid));
-  if (used+days>DAYS_PER_YEAR) {
-    msg.textContent=`⚠ ${w.name} solo tiene ${DAYS_PER_YEAR-used} días disponibles. Estás añadiendo ${days}.`;
-    msg.style.display='block'; return;
-  }
-  const btn = document.getElementById('btnAdd');
-  btn.innerHTML='<span class="spinner"></span>Guardando...'; btn.disabled=true;
-  try {
-    const res = await apiPost({action:'addEntry',wid,start,end,days});
-    if (res.ok) {
-      entries.push({id:res.id,wid,start,end,days,status:'pending'});
-      render();
-      document.getElementById('dateStart').value='';
-      document.getElementById('dateEnd').value='';
-      setSyncStatus('ok','Guardado en Sheets ✓');
-    }
-  } catch(e){ setSyncStatus('err','Error al guardar'); }
-  btn.innerHTML='+ Añadir'; btn.disabled=false;
-}
-
-async function chgStatus(id, status) {
+async function chgStatus(id,status){
   setSyncStatus('loading','Guardando...');
   await apiPost({action:'updateEntry',id,status});
-  const e = entries.find(e=>String(e.id)===String(id));
-  if (e) e.status=status;
-  render(); setSyncStatus('ok','Sincronizado');
+  const e=entries.find(e=>String(e.id)===String(id));
+  if(e)e.status=status;
+  renderAdmin();setSyncStatus('ok','Sincronizado ✓');
 }
 
-async function delEntry(id) {
-  if (!confirm('¿Eliminar este registro?')) return;
-  setSyncStatus('loading','Eliminando...');
+async function delEntry(id){
+  if(!confirm('¿Eliminar este registro?'))return;
   await apiPost({action:'deleteEntry',id});
-  entries = entries.filter(e=>String(e.id)!==String(id));
-  render(); setSyncStatus('ok','Sincronizado');
+  entries=entries.filter(e=>String(e.id)!==String(id));
+  renderAdmin();
 }
 
-// ── WORKERS MODAL ──────────────────────────────────────────
-function openModal(mode, wid) {
-  editingWorkerId = wid || null;
-  document.getElementById('modalTitle').textContent = mode==='edit' ? 'Editar trabajador' : 'Añadir trabajador';
-  if (mode==='edit' && wid) {
-    const w = workers.find(w=>String(w.id)===String(wid));
-    document.getElementById('modalName').value = w.name;
-    document.getElementById('modalRole').value = w.role||'';
+function setFilter(f,btn){currentFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdminEntries();}
+
+// ── WORKER MODAL ──────────────────────────────────────────
+function openWorkerModal(mode,wid){
+  editingWId=wid||null;
+  document.getElementById('workerModalTitle').textContent=mode==='edit'?'Editar trabajador':'Añadir trabajador';
+  if(mode==='edit'&&wid){
+    const w=workers.find(w=>String(w.id)===String(wid));
+    document.getElementById('wModalName').value=w.name;
+    document.getElementById('wModalEmail').value=w.email;
   } else {
-    document.getElementById('modalName').value='';
-    document.getElementById('modalRole').value='';
+    document.getElementById('wModalName').value='';
+    document.getElementById('wModalEmail').value='';
   }
-  document.getElementById('modalBg').classList.add('open');
-  document.getElementById('modalName').focus();
+  document.getElementById('workerModal').classList.add('open');
 }
+function closeWorkerModal(){document.getElementById('workerModal').classList.remove('open');editingWId=null;}
 
-function closeModal() {
-  document.getElementById('modalBg').classList.remove('open');
-  editingWorkerId=null;
-}
-
-async function saveWorker() {
-  const name = document.getElementById('modalName').value.trim();
-  const role = document.getElementById('modalRole').value.trim();
-  if (!name){ alert('Introduce un nombre.'); return; }
-  const btn = document.getElementById('modalSaveBtn');
-  btn.innerHTML='<span class="spinner"></span>Guardando...'; btn.disabled=true;
-  try {
-    if (editingWorkerId) {
-      await apiPost({action:'editWorker',id:editingWorkerId,name,role});
-      const w = workers.find(w=>String(w.id)===String(editingWorkerId));
-      if (w){w.name=name;w.role=role;}
+async function saveWorker(){
+  const name=document.getElementById('wModalName').value.trim();
+  const workerEmail=document.getElementById('wModalEmail').value.trim().toLowerCase();
+  if(!name||!workerEmail){alert('Rellena todos los campos.');return;}
+  const btn=document.getElementById('wModalSave');
+  btn.innerHTML='<span class="spinner"></span>';btn.disabled=true;
+  try{
+    if(editingWId){
+      await apiPost({action:'editWorker',id:editingWId,name,workerEmail});
+      const w=workers.find(w=>String(w.id)===String(editingWId));
+      if(w){w.name=name;w.email=workerEmail;}
     } else {
-      const res = await apiPost({action:'addWorker',name,role});
-      if (res.ok) workers.push({id:res.id,name,role});
+      const res=await apiPost({action:'addWorker',name,workerEmail});
+      if(res.ok)workers.push({id:res.id,name,email:workerEmail});
     }
-    render(); closeModal(); setSyncStatus('ok','Sincronizado');
-  } catch(e){ setSyncStatus('err','Error al guardar'); }
-  btn.innerHTML='Guardar'; btn.disabled=false;
+    renderAdmin();closeWorkerModal();setSyncStatus('ok','Sincronizado');
+  }catch(e){alert('Error al guardar.');}
+  btn.innerHTML='Guardar';btn.disabled=false;
 }
 
-async function deleteWorker(id) {
-  const w = workers.find(w=>String(w.id)===String(id));
-  if (!confirm(`¿Eliminar a ${w.name}? También se eliminarán sus vacaciones registradas.`)) return;
-  setSyncStatus('loading','Eliminando...');
+async function delWorker(id){
+  const w=workers.find(w=>String(w.id)===String(id));
+  if(!confirm(`¿Eliminar a ${w.name}?`))return;
   await apiPost({action:'deleteWorker',id});
-  workers = workers.filter(w=>String(w.id)!==String(id));
-  entries = entries.filter(e=>String(e.wid)!==String(id));
-  render(); setSyncStatus('ok','Sincronizado');
+  workers=workers.filter(w=>String(w.id)!==String(id));
+  renderAdmin();
 }
 
-// ── FILTER ────────────────────────────────────────────────
-function setFilter(f,btn) {
-  currentFilter=f;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderEntries();
+// ── WORKER VIEW ───────────────────────────────────────────
+function renderWorker(){
+  if(!myWorker)return;
+  const used=myEntries.filter(e=>e.status!=='rejected'&&new Date(e.start).getFullYear()===currentYear).reduce((s,e)=>s+e.days,0);
+  const pct=Math.min(100,(used/DAYS_PER_YEAR)*100);
+  document.getElementById('myDaysUsed').textContent=used;
+  document.getElementById('myName').textContent=myWorker.name;
+  document.getElementById('myDaysLeft').textContent=`${DAYS_PER_YEAR-used} días restantes`;
+  document.getElementById('myBarFill').style.width=pct+'%';
+  document.getElementById('myDaysTotal').textContent=DAYS_PER_YEAR;
+
+  const lbl={pending:'Pendiente ⏳',approved:'Aprobada ✅',rejected:'Rechazada ❌'};
+  const tbody=document.getElementById('myEntriesBody'),empty=document.getElementById('myEmpty');
+  const list=[...myEntries].reverse();
+  if(!list.length){tbody.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  tbody.innerHTML=list.map(e=>`<tr>
+    <td>${fmt(e.start)}</td><td>${fmt(e.end)}</td><td><b>${e.days}</b></td>
+    <td><span class="tag ${e.status}">${lbl[e.status]||e.status}</span></td>
+    <td>${e.status==='pending'?`<button class="btn sm del" onclick="delMyEntry('${e.id}')">Cancelar</button>`:''}</td>
+  </tr>`).join('');
+}
+
+async function addMyEntry(){
+  const msg=document.getElementById('myErr');msg.style.display='none';
+  const start=document.getElementById('myStart').value,end=document.getElementById('myEnd').value;
+  if(!start||!end){msg.textContent='Introduce las fechas.';msg.style.display='block';return;}
+  if(start>end){msg.textContent='La fecha inicio no puede ser posterior al fin.';msg.style.display='block';return;}
+  const days=businessDays(start,end);
+  const used=myEntries.filter(e=>e.status!=='rejected'&&new Date(e.start).getFullYear()===currentYear).reduce((s,e)=>s+e.days,0);
+  if(used+days>DAYS_PER_YEAR){msg.textContent=`Solo te quedan ${DAYS_PER_YEAR-used} días disponibles.`;msg.style.display='block';return;}
+  const btn=document.getElementById('btnMyAdd');
+  btn.innerHTML='<span class="spinner"></span>';btn.disabled=true;
+  try{
+    const res=await apiPost({action:'addEntry',start,end,days});
+    if(res.ok){
+      myEntries.push({id:res.id,workerEmail:session.email,start,end,days,status:'pending'});
+      renderWorker();
+      document.getElementById('myStart').value='';
+      document.getElementById('myEnd').value='';
+      setSyncStatus('ok','Solicitud enviada ✓');
+    }
+  }catch(e){msg.textContent='Error de conexión.';msg.style.display='block';}
+  btn.innerHTML='Solicitar';btn.disabled=false;
+}
+
+async function delMyEntry(id){
+  if(!confirm('¿Cancelar esta solicitud?'))return;
+  await apiPost({action:'deleteEntry',id});
+  myEntries=myEntries.filter(e=>String(e.id)!==String(id));
+  renderWorker();
 }
 
 // ── EXPORT PDF ────────────────────────────────────────────
-function exportPDF() {
-  const wid = document.getElementById('exportWorker').value;
-  const workerName = wid!=='0' ? workers.find(w=>String(w.id)===wid)?.name : 'Todo el equipo';
-  const lbl = {pending:'Pendiente',approved:'Aprobada',rejected:'Rechazada'};
-  let list = wid!=='0' ? entries.filter(e=>String(e.wid)===wid) : entries;
-  list = [...list].sort((a,b)=>String(a.start).localeCompare(String(b.start)));
-  const approved = list.filter(e=>e.status==='approved').reduce((s,e)=>s+e.days,0);
-  const total    = list.filter(e=>e.status!=='rejected').reduce((s,e)=>s+e.days,0);
-  const workerRow = wid!=='0'?'':'`<th style="padding:10px 12px;text-align:left;background:#f4f7f8;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b8f96">Trabajador</th>`';
-  const rows = list.map(e=>{
-    const w=workers.find(w=>String(w.id)===String(e.wid))||{name:'?'};
+function exportPDF(){
+  const wEmail=document.getElementById('exportWorker').value;
+  const wName=wEmail!=='0'?workers.find(w=>w.email===wEmail)?.name:'Todo el equipo';
+  const lbl={pending:'Pendiente',approved:'Aprobada',rejected:'Rechazada'};
+  let list=wEmail!=='0'?entries.filter(e=>String(e.workerEmail).toLowerCase()===wEmail.toLowerCase()):entries;
+  list=[...list].sort((a,b)=>String(a.start).localeCompare(String(b.start)));
+  const approved=list.filter(e=>e.status==='approved').reduce((s,e)=>s+e.days,0);
+  const total=list.filter(e=>e.status!=='rejected').reduce((s,e)=>s+e.days,0);
+  const rows=list.map(e=>{
+    const w=workers.find(w=>String(w.email).toLowerCase()===String(e.workerEmail).toLowerCase())||{name:e.workerEmail};
     const sc=e.status==='approved'?'#27ae60':e.status==='rejected'?'#c0392b':'#e6a817';
-    const wc=wid!=='0'?'':'<td style="padding:10px 12px;border-bottom:1px solid #eee">'+w.name+'</td>';
-    return `<tr>${wc}<td style="padding:10px 12px;border-bottom:1px solid #eee">${fmt(e.start)}</td><td style="padding:10px 12px;border-bottom:1px solid #eee">${fmt(e.end)}</td><td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:center"><strong>${e.days}</strong></td><td style="padding:10px 12px;border-bottom:1px solid #eee"><span style="background:${sc}18;color:${sc};padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700">${lbl[e.status]||e.status}</span></td></tr>`;
+    const wc=wEmail!=='0'?'':`<td style="padding:10px 12px;border-bottom:1px solid #eee">${w.name}</td>`;
+    return `<tr>${wc}<td style="padding:10px 12px;border-bottom:1px solid #eee">${fmt(e.start)}</td><td style="padding:10px 12px;border-bottom:1px solid #eee">${fmt(e.end)}</td><td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:center"><b>${e.days}</b></td><td style="padding:10px 12px;border-bottom:1px solid #eee"><span style="background:${sc}18;color:${sc};padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700">${lbl[e.status]||e.status}</span></td></tr>`;
   }).join('');
-  const workerInfo = wid!=='0' ? (workers.find(w=>String(w.id)===wid)||{name:workerName,role:''}) : null;
-  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:'Helvetica Neue',Arial,sans-serif;color:#1a2e33;margin:0;padding:40px}@media print{body{padding:20px}}</style></head><body>
+  const wInfo=wEmail!=='0'?workers.find(w=>w.email===wEmail):null;
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:'Helvetica Neue',Arial,sans-serif;color:#1a2e33;margin:0;padding:40px}</style></head><body>
   <div style="display:flex;align-items:center;gap:14px;margin-bottom:32px;padding-bottom:20px;border-bottom:3px solid #164655">
-    <div style="width:48px;height:48px;background:#2d7d8f;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px;flex-shrink:0">AV</div>
-    <div><div style="font-size:20px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#164655">Vertex Global Trade</div><div style="font-size:12px;color:#6b8f96;letter-spacing:1px;text-transform:uppercase">Informe de Vacaciones · ${currentYear}</div></div>
-    <div style="margin-left:auto;text-align:right"><div style="font-size:13px;color:#6b8f96">Generado el</div><div style="font-size:13px;font-weight:700">${new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'})}</div></div>
+    <div style="width:48px;height:48px;background:#2d7d8f;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px">AV</div>
+    <div><div style="font-size:20px;font-weight:800;color:#164655">Vertex Global Trade</div><div style="font-size:12px;color:#6b8f96">Informe de Vacaciones · ${currentYear}</div></div>
+    <div style="margin-left:auto;text-align:right"><div style="font-size:13px;font-weight:700">${new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'})}</div></div>
   </div>
-  <div style="margin-bottom:24px"><div style="font-size:18px;font-weight:700;color:#164655;margin-bottom:4px">${workerName}</div>${workerInfo?`<div style="font-size:13px;color:#6b8f96">${workerInfo.role||''}</div>`:''}</div>
+  <div style="margin-bottom:24px"><div style="font-size:18px;font-weight:700;color:#164655">${wName}</div>${wInfo?`<div style="font-size:13px;color:#6b8f96">${wInfo.email}</div>`:''}</div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px">
-    <div style="background:#e8f4f6;border-radius:12px;padding:16px 18px"><div style="font-size:28px;font-weight:800;color:#2d7d8f">${list.length}</div><div style="font-size:12px;color:#6b8f96">Solicitudes totales</div></div>
-    <div style="background:#eafaf1;border-radius:12px;padding:16px 18px"><div style="font-size:28px;font-weight:800;color:#27ae60">${approved}</div><div style="font-size:12px;color:#6b8f96">Días aprobados</div></div>
-    <div style="background:#e8f4f6;border-radius:12px;padding:16px 18px"><div style="font-size:28px;font-weight:800;color:#164655">${wid!=='0'?DAYS_PER_YEAR-total:'—'}</div><div style="font-size:12px;color:#6b8f96">${wid!=='0'?'Días restantes':'Días por persona'}</div></div>
+    <div style="background:#e8f4f6;border-radius:12px;padding:16px"><div style="font-size:28px;font-weight:800;color:#2d7d8f">${list.length}</div><div style="font-size:12px;color:#6b8f96">Solicitudes</div></div>
+    <div style="background:#eafaf1;border-radius:12px;padding:16px"><div style="font-size:28px;font-weight:800;color:#27ae60">${approved}</div><div style="font-size:12px;color:#6b8f96">Días aprobados</div></div>
+    <div style="background:#e8f4f6;border-radius:12px;padding:16px"><div style="font-size:28px;font-weight:800;color:#164655">${wEmail!=='0'?DAYS_PER_YEAR-total:'—'}</div><div style="font-size:12px;color:#6b8f96">Días restantes</div></div>
   </div>
-  <table style="width:100%;border-collapse:collapse;font-size:14px">
-    <thead><tr style="background:#f4f7f8">${wid!=='0'?'':'<th style=\"padding:10px 12px;text-align:left;background:#f4f7f8;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b8f96\">Trabajador</th>'}<th style="padding:10px 12px;text-align:left;background:#f4f7f8;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b8f96">Inicio</th><th style="padding:10px 12px;text-align:left;background:#f4f7f8;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b8f96">Fin</th><th style="padding:10px 12px;text-align:center;background:#f4f7f8;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b8f96">Días</th><th style="padding:10px 12px;text-align:left;background:#f4f7f8;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b8f96">Estado</th></tr></thead>
-    <tbody>${rows||'<tr><td colspan="5" style="padding:30px;text-align:center;color:#999">Sin registros</td></tr>'}</tbody>
-  </table>
-  <div style="margin-top:40px;padding-top:16px;border-top:1px solid #dce8eb;font-size:11px;color:#aaa;text-align:center">Vertex Global Trade, S.L. · Documento generado automáticamente</div>
+  <table style="width:100%;border-collapse:collapse;font-size:14px"><thead><tr style="background:#f4f7f8">${wEmail!=='0'?'':`<th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b8f96">Trabajador</th>`}<th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b8f96">Inicio</th><th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b8f96">Fin</th><th style="padding:10px 12px;text-align:center;font-size:11px;text-transform:uppercase;color:#6b8f96">Días</th><th style="padding:10px 12px;font-size:11px;text-transform:uppercase;color:#6b8f96">Estado</th></tr></thead><tbody>${rows||'<tr><td colspan="5" style="padding:30px;text-align:center;color:#999">Sin registros</td></tr>'}</tbody></table>
   </body></html>`;
-  const win=window.open('','_blank'); win.document.write(html); win.document.close(); setTimeout(()=>win.print(),400);
+  const win=window.open('','_blank');win.document.write(html);win.document.close();setTimeout(()=>win.print(),400);
 }
 
-// ── INIT ──────────────────────────────────────────────────
-document.getElementById('modalBg').addEventListener('click', e => { if (e.target===e.currentTarget) closeModal(); });
-document.addEventListener('keydown', e => { if (e.key==='Escape') closeModal(); });
+// ── INIT ─────────────────────────────────────────────────
+document.getElementById('workerModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeWorkerModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeWorkerModal();});
+document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 
-loadAll();
+// Check for password reset token in URL
+const urlParams=new URLSearchParams(window.location.search);
+if(urlParams.get('action')==='verifyToken'&&urlParams.get('token')){
+  const email=urlParams.get('email'),token=urlParams.get('token');
+  fetch(WEB_APP_URL+'?'+new URLSearchParams({action:'verifyToken',email,token}))
+    .then(r=>r.json()).then(d=>{
+      if(d.ok){showForm('setPass');}
+      else{showErr('loginErr','Enlace inválido o expirado. Solicita uno nuevo.');showForm('login');}
+    });
+} else if(session?.token){
+  startApp();
+}
 </script>
 </body>
 </html>
