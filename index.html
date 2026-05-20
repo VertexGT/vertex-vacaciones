@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0052)file:///C:/Users/info/Downloads/vertex_app_v2_3.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vertex Global Trade – Vacaciones</title>
 <style>
@@ -176,7 +176,7 @@ select:focus,input[type="date"]:focus{border-color:var(--teal);background:#fff;}
       <div class="field"><label>Email corporativo</label><input type="email" id="loginEmail" placeholder="tu@vertexglobaltrade.com" autocomplete="email"></div>
       <div class="field"><label>Contraseña</label><input type="password" id="loginPass" placeholder="Tu contraseña" autocomplete="current-password"></div>
       <button class="btn-main" id="btnLogin" onclick="doLogin()">Entrar</button>
-      <div class="login-link"><a onclick="showForm('first')">Primera vez aquí · Crear contraseña</a></div>
+      <div class="login-link"><a onclick="showForm(&#39;first&#39;)">Primera vez aquí · Crear contraseña</a></div>
     </div>
 
     <!-- FIRST TIME FORM -->
@@ -187,7 +187,7 @@ select:focus,input[type="date"]:focus{border-color:var(--teal);background:#fff;}
       <div class="msg-ok" id="firstOk"></div>
       <div class="field"><label>Tu email corporativo</label><input type="email" id="firstEmail" placeholder="tu@vertexglobaltrade.com"></div>
       <button class="btn-main" id="btnFirst" onclick="doRequestPassword()">Enviar enlace</button>
-      <div class="login-link"><a onclick="showForm('login')">← Volver al login</a></div>
+      <div class="login-link"><a onclick="showForm(&#39;login&#39;)">← Volver al login</a></div>
     </div>
 
     <!-- SET PASSWORD FORM -->
@@ -227,20 +227,20 @@ select:focus,input[type="date"]:focus{border-color:var(--teal);background:#fff;}
       </div>
       <div class="section-header">
         <div class="section-title">Equipo · Estado de vacaciones</div>
-        <button class="btn add-w" onclick="openWorkerModal('add')">+ Añadir trabajador</button>
+        <button class="btn add-w" onclick="openWorkerModal(&#39;add&#39;)">+ Añadir trabajador</button>
       </div>
       <div class="grid" id="workersGrid"></div>
       <div class="panel">
         <div class="panel-title">Historial de vacaciones</div>
         <div class="filter-row">
           <div class="filter-btns">
-            <button class="filter-btn active" onclick="setFilter('all',this)">Todos</button>
-            <button class="filter-btn" onclick="setFilter('pending',this)">Pendientes</button>
-            <button class="filter-btn" onclick="setFilter('approved',this)">Aprobadas</button>
-            <button class="filter-btn" onclick="setFilter('rejected',this)">Rechazadas</button>
+            <button class="filter-btn active" onclick="setFilter(&#39;all&#39;,this)">Todos</button>
+            <button class="filter-btn" onclick="setFilter(&#39;pending&#39;,this)">Pendientes</button>
+            <button class="filter-btn" onclick="setFilter(&#39;approved&#39;,this)">Aprobadas</button>
+            <button class="filter-btn" onclick="setFilter(&#39;rejected&#39;,this)">Rechazadas</button>
           </div>
           <div style="display:flex;gap:8px;align-items:center">
-            <select id="exportWorker" style="padding:6px 10px;font-size:11px;border-radius:7px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;outline:none;"></select>
+            <select id="exportWorker" style="padding:6px 10px;font-size:11px;border-radius:7px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:&#39;Lato&#39;,sans-serif;outline:none;"></select>
             <button class="btn" style="padding:7px 14px;font-size:11px" onclick="exportPDF()">⬇ PDF</button>
           </div>
         </div>
@@ -319,10 +319,14 @@ function setSyncStatus(state,label){document.getElementById('syncDot').className
 
 async function api(params){
   const url=WEB_APP_URL+'?'+new URLSearchParams({...params,token:session?.token||''});
-  const res=await fetch(url);return res.json();
+  const res=await fetch(url,{redirect:'follow'});
+  return res.json();
 }
 async function apiPost(body){
-  const res=await fetch(WEB_APP_URL,{method:'POST',body:JSON.stringify({...body,token:session?.token||''})});
+  const payload=JSON.stringify({...body,token:session?.token||''});
+  // Use no-cors GET with encoded body as fallback for CORS issues
+  const url=WEB_APP_URL+'?payload='+encodeURIComponent(payload);
+  const res=await fetch(url,{redirect:'follow'});
   return res.json();
 }
 
@@ -659,5 +663,6 @@ if(urlParams.get('action')==='verifyToken'&&urlParams.get('token')){
   startApp();
 }
 </script>
-</body>
-</html>
+
+
+</body></html>
