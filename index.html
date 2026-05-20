@@ -1,668 +1,818 @@
 <!DOCTYPE html>
-<!-- saved from url=(0052)file:///C:/Users/info/Downloads/vertex_app_v2_3.html -->
-<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vertex Global Trade — Vacaciones</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vertex Global Trade – Vacaciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+
+<!-- jsPDF para exportar a PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Lato:wght@300;400;700&display=swap');
-:root {
-  --teal:#2d7d8f;--teal-dark:#1f5f70;--teal-deep:#164655;
-  --teal-lite:#e8f4f6;--teal-mid:#b3d8df;
-  --bg:#f4f7f8;--surface:#fff;--border:#dce8eb;
-  --text:#1a2e33;--muted:#6b8f96;
-  --green:#27ae60;--green-bg:#eafaf1;
-  --yellow:#e6a817;--yellow-bg:#fef9e7;
-  --red:#c0392b;--red-bg:#fdedec;
-  --r:14px;
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;min-height:100vh;}
+  :root{
+    --teal-deep:#164655;
+    --teal:#2d7d8f;
+    --teal-lite:#e8f4f6;
+    --ok:#1b7f4d;
+    --warn:#c98a14;
+    --bad:#b23a3a;
+    --ink:#2a3439;
+    --muted:#6b7b82;
+    --line:#dce8eb;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;font-family:'Lato',Arial,sans-serif;color:var(--ink);
+    background:linear-gradient(160deg,#f4fafb 0%,#e8f4f6 100%);min-height:100vh;
+  }
+  h1,h2,h3,.brand,.btn{font-family:'Montserrat',Arial,sans-serif}
+  a{color:var(--teal)}
+  .hidden{display:none !important}
 
-/* ── TOPBAR ── */
-.topbar{background:var(--teal-deep);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:60px;box-shadow:0 2px 12px rgba(22,70,85,0.22);}
-.logo-wrap{display:flex;align-items:center;gap:10px;}
-.logo-img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.2);}
-.logo-text{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:#fff;letter-spacing:1.5px;text-transform:uppercase;}
-.logo-sub{font-size:9px;color:var(--teal-mid);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
-.user-info{font-size:12px;color:rgba(255,255,255,0.7);font-family:'Montserrat',sans-serif;}
-.user-email{color:#fff;font-weight:600;}
-.btn-logout{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);border-radius:8px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background 0.2s;}
-.btn-logout:hover{background:rgba(255,255,255,0.2);}
+  /* ---------- logo ---------- */
+  .logo{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:0 0 auto;
+        background:var(--teal);color:#fff;font-family:'Montserrat';font-weight:700;
+        display:flex;align-items:center;justify-content:center;font-size:18px}
 
-/* ── LOGIN PAGE ── */
-.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,var(--teal-deep) 0%,var(--teal) 100%);}
-.login-box{background:#fff;border-radius:20px;padding:36px 32px;width:100%;max-width:400px;box-shadow:0 24px 60px rgba(0,0,0,0.25);}
-.login-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px;}
-.login-logo img{width:44px;height:44px;border-radius:50%;object-fit:cover;}
-.login-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--teal-deep);text-transform:uppercase;letter-spacing:1px;}
-.login-subtitle{font-size:11px;color:var(--muted);margin-top:2px;}
-.login-h{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;color:var(--teal-deep);margin-bottom:6px;}
-.login-desc{font-size:13px;color:var(--muted);margin-bottom:24px;}
-.field{margin-bottom:14px;}
-.field label{display:block;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.8px;font-family:'Montserrat',sans-serif;}
-.field input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-family:'Lato',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
-.field input:focus{border-color:var(--teal);background:#fff;box-shadow:0 0 0 3px rgba(45,125,143,0.1);}
-.btn-main{width:100%;background:var(--teal);color:#fff;border:none;border-radius:10px;padding:12px;font-weight:700;font-size:14px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background 0.18s;margin-top:4px;}
-.btn-main:hover{background:var(--teal-dark);}
-.btn-main:disabled{opacity:0.6;cursor:not-allowed;}
-.login-link{text-align:center;margin-top:16px;font-size:13px;color:var(--muted);}
-.login-link a{color:var(--teal);font-weight:600;cursor:pointer;text-decoration:none;}
-.login-link a:hover{text-decoration:underline;}
-.msg-err{background:var(--red-bg);border:1px solid var(--red);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--red);margin-bottom:12px;display:none;}
-.msg-ok{background:var(--green-bg);border:1px solid var(--green);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--green);margin-bottom:12px;display:none;}
+  /* ---------- header ---------- */
+  header.bar{
+    background:var(--teal-deep);color:#fff;padding:14px 20px;display:flex;
+    align-items:center;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,.12)
+  }
+  header.bar .brand{font-size:18px;font-weight:700;line-height:1.1}
+  header.bar .brand small{display:block;font-family:'Lato';font-weight:400;font-size:12px;opacity:.8}
+  header.bar .spacer{flex:1}
+  header.bar .who{font-size:13px;text-align:right;opacity:.95}
+  header.bar .who b{display:block}
 
-/* ── CONTENT ── */
-.content{padding:24px 28px;max-width:1200px;margin:0 auto;}
-.page{display:none;}
-.page.active{display:block;}
+  /* ---------- buttons ---------- */
+  .btn{border:0;border-radius:9px;padding:11px 18px;font-size:14px;font-weight:600;
+       cursor:pointer;background:var(--teal);color:#fff;transition:.15s;display:inline-flex;
+       align-items:center;gap:7px;justify-content:center}
+  .btn:hover{filter:brightness(1.07)}
+  .btn:disabled{opacity:.55;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+  .btn.outline{background:#fff;color:var(--teal);border:1px solid var(--teal)}
+  .btn.sm{padding:7px 12px;font-size:12.5px}
+  .btn.ok{background:var(--ok)}
+  .btn.bad{background:var(--bad)}
+  .btn.warn{background:var(--warn)}
+  .btn.gray{background:#7c8c92}
 
-/* ── STATS ── */
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:22px;}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 1px 4px rgba(45,125,143,0.07);}
-.stat-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.stat-num{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:800;line-height:1;margin-bottom:3px;}
-.stat-label{font-size:11px;color:var(--muted);}
+  /* ---------- layout ---------- */
+  .wrap{max-width:1080px;margin:0 auto;padding:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;
+        box-shadow:0 4px 16px rgba(22,70,85,.05);margin-bottom:20px}
+  .card h2{margin:0 0 16px;color:var(--teal-deep);font-size:18px}
+  .grid{display:grid;gap:16px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
 
-/* ── SECTION ── */
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;}
-.section-title{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+  label{display:block;font-size:13px;font-weight:700;color:var(--teal-deep);margin:0 0 5px}
+  input,select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;
+        font-size:14px;font-family:'Lato';background:#fff}
+  input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(45,125,143,.15)}
+  .field{margin-bottom:14px}
 
-/* ── WORKER GRID ── */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:11px;margin-bottom:22px;}
-.worker-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:15px 17px;box-shadow:0 1px 4px rgba(45,125,143,0.06);transition:border-color 0.2s;}
-.worker-card:hover{border-color:var(--teal);}
-.worker-header{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
-.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;flex-shrink:0;}
-.worker-name{font-family:'Montserrat',sans-serif;font-weight:600;font-size:13px;}
-.worker-email{font-size:10px;color:var(--muted);margin-top:1px;}
-.worker-actions{display:flex;gap:4px;margin-left:auto;}
-.icon-btn{background:none;border:none;cursor:pointer;padding:4px;border-radius:5px;font-size:12px;color:var(--muted);transition:background 0.15s;}
-.icon-btn:hover{background:var(--teal-lite);color:var(--teal);}
-.icon-btn.del:hover{background:var(--red-bg);color:var(--red);}
-.days-bar{height:5px;background:var(--teal-lite);border-radius:99px;overflow:hidden;margin-bottom:6px;}
-.days-fill{height:100%;border-radius:99px;transition:width 0.4s;}
-.days-text{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);}
+  /* ---------- login ---------- */
+  .auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+  .auth .card{max-width:400px;width:100%;text-align:center}
+  .auth .logo{width:64px;height:64px;font-size:24px;margin:0 auto 12px}
+  .auth h1{color:var(--teal-deep);font-size:21px;margin:0 0 2px}
+  .auth p.sub{color:var(--muted);font-size:13px;margin:0 0 22px}
+  .auth .field{text-align:left}
+  .auth .btn{width:100%;margin-top:6px}
+  .auth .link{margin-top:16px;font-size:13px}
+  .auth .link a{cursor:pointer;text-decoration:underline}
 
-/* ── PANEL ── */
-.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;margin-bottom:15px;box-shadow:0 1px 4px rgba(45,125,143,0.06);}
-.panel-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.panel-title::before{content:'';display:block;width:4px;height:15px;background:var(--teal);border-radius:2px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:11px;align-items:end;}
-.form-row.two{grid-template-columns:1fr 1fr auto;}
-label{display:block;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.8px;font-family:'Montserrat',sans-serif;}
-select,input[type="date"]{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:9px 11px;color:var(--text);font-family:'Lato',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
-select:focus,input[type="date"]:focus{border-color:var(--teal);background:#fff;}
-.btn{background:var(--teal);color:#fff;border:none;border-radius:9px;padding:9px 18px;font-weight:700;font-size:12px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background 0.18s;white-space:nowrap;}
-.btn:hover{background:var(--teal-dark);}
-.btn.sm{padding:4px 10px;font-size:10px;border-radius:6px;margin-right:3px;}
-.btn.approve{background:var(--green-bg);color:var(--green);}
-.btn.approve:hover{background:#d4efdf;}
-.btn.rj{background:var(--yellow-bg);color:var(--yellow);}
-.btn.rj:hover{background:#fde5b0;}
-.btn.del{background:var(--red-bg);color:var(--red);}
-.btn.del:hover{background:#f9cdc9;}
-.btn.add-w{background:var(--teal);color:#fff;border:none;border-radius:8px;padding:6px 13px;font-weight:700;font-size:11px;font-family:'Montserrat',sans-serif;cursor:pointer;display:flex;align-items:center;gap:4px;}
-.form-err{font-size:12px;color:var(--red);margin-top:7px;display:none;}
+  /* ---------- banner / progress ---------- */
+  .banner{background:linear-gradient(120deg,var(--teal-deep),var(--teal));color:#fff;
+          border-radius:14px;padding:22px;margin-bottom:20px}
+  .banner .nums{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:14px}
+  .banner .num b{display:block;font-family:'Montserrat';font-size:30px;line-height:1}
+  .banner .num span{font-size:12.5px;opacity:.85}
+  .progress{height:12px;border-radius:8px;background:rgba(255,255,255,.28);overflow:hidden}
+  .progress > i{display:block;height:100%;background:#fff;border-radius:8px}
 
-/* ── MY DAYS BANNER ── */
-.my-days-banner{background:var(--teal-deep);border-radius:var(--r);padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;gap:20px;}
-.my-days-num{font-family:'Montserrat',sans-serif;font-size:42px;font-weight:800;color:var(--teal-mid);line-height:1;}
-.my-days-label{font-size:13px;color:rgba(255,255,255,0.7);}
-.my-days-name{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
-.my-days-bar-wrap{flex:1;}
-.my-bar-bg{height:8px;background:rgba(255,255,255,0.15);border-radius:99px;overflow:hidden;margin-top:10px;}
-.my-bar-fill{height:100%;border-radius:99px;background:var(--teal-mid);transition:width 0.5s;}
+  /* mini progress (admin cards) */
+  .mini{height:9px;border-radius:6px;background:var(--teal-lite);overflow:hidden;margin:8px 0 6px}
+  .mini > i{display:block;height:100%;background:var(--teal)}
 
-/* ── TABLE ── */
-.filter-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;flex-wrap:wrap;gap:9px;}
-.filter-btns{display:flex;gap:7px;}
-.filter-btn{background:var(--bg);border:1.5px solid var(--border);color:var(--muted);border-radius:7px;padding:5px 13px;font-size:10px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.18s;}
-.filter-btn.active{border-color:var(--teal);color:var(--teal);background:var(--teal-lite);}
-.entries-table{width:100%;border-collapse:collapse;font-size:12px;}
-.entries-table th{text-align:left;padding:8px 12px;font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);border-bottom:2px solid var(--border);font-family:'Montserrat',sans-serif;font-weight:700;}
-.entries-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle;}
-.entries-table tr:last-child td{border-bottom:none;}
-.entries-table tbody tr:hover td{background:#f0f8fa;}
-.tag{display:inline-block;padding:3px 9px;border-radius:99px;font-size:9px;font-weight:700;font-family:'Montserrat',sans-serif;}
-.tag.approved{background:var(--green-bg);color:var(--green);}
-.tag.pending{background:var(--yellow-bg);color:var(--yellow);}
-.tag.rejected{background:var(--red-bg);color:var(--red);}
-.name-cell{display:flex;align-items:center;gap:8px;}
-.mini-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;font-family:'Montserrat',sans-serif;flex-shrink:0;}
-.empty{text-align:center;padding:40px;color:var(--muted);font-size:13px;}
+  /* ---------- badges ---------- */
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:700}
+  .badge.pendiente{background:#fdf1d8;color:var(--warn)}
+  .badge.aprobada{background:#dcf3e6;color:var(--ok)}
+  .badge.rechazada{background:#fadcdc;color:var(--bad)}
 
-/* ── MODAL ── */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;display:none;align-items:center;justify-content:center;}
-.modal-bg.open{display:flex;}
-.modal{background:#fff;border-radius:16px;padding:26px 28px;width:400px;max-width:94vw;box-shadow:0 20px 60px rgba(0,0,0,0.25);}
-.modal h3{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:var(--teal-deep);margin-bottom:18px;}
-.modal-field{margin-bottom:12px;}
-.modal-field label{display:block;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.8px;font-family:'Montserrat',sans-serif;}
-.modal-field input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:10px 12px;color:var(--text);font-family:'Lato',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
-.modal-field input:focus{border-color:var(--teal);background:#fff;}
-.modal-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:18px;}
-.btn-cancel{background:var(--bg);color:var(--muted);border:1.5px solid var(--border);border-radius:9px;padding:8px 16px;font-weight:600;font-size:12px;cursor:pointer;font-family:'Montserrat',sans-serif;}
-.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:5px;}
-@keyframes spin{to{transform:rotate(360deg)}}
-.sync-status{font-size:11px;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:5px;}
-.sync-dot{width:7px;height:7px;border-radius:50%;background:#6b8f96;flex-shrink:0;}
-.sync-dot.ok{background:#4ade80;}
-.sync-dot.err{background:#f87171;}
-.sync-dot.loading{background:var(--yellow);animation:pulse 1s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-@media(max-width:700px){.content{padding:14px;}.form-row{grid-template-columns:1fr 1fr;}.stats-row{grid-template-columns:1fr;}.topbar{padding:0 14px;}}
+  /* ---------- tables ---------- */
+  table.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+  table.tbl th,table.tbl td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  table.tbl th{color:var(--teal-deep);font-family:'Montserrat';font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+  table.tbl tr:last-child td{border-bottom:0}
+  .tbl-scroll{overflow-x:auto}
+
+  /* ---------- admin worker cards ---------- */
+  .workers{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .wcard{border:1px solid var(--line);border-radius:12px;padding:14px}
+  .wcard .nm{font-family:'Montserrat';font-weight:700;color:var(--teal-deep)}
+  .wcard .em{font-size:12px;color:var(--muted);margin-bottom:6px;word-break:break-all}
+  .wcard .info{font-size:12px;color:var(--muted)}
+  .wcard .acts{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+
+  /* ---------- stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+  .stat b{display:block;font-family:'Montserrat';font-size:28px;color:var(--teal-deep)}
+  .stat span{font-size:12.5px;color:var(--muted)}
+
+  /* ---------- filters ---------- */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .filters .chip{border:1px solid var(--line);background:#fff;color:var(--muted);
+        border-radius:20px;padding:7px 15px;font-size:13px;cursor:pointer;font-weight:600}
+  .filters .chip.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+  /* ---------- toast ---------- */
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9999;
+         display:flex;flex-direction:column;gap:8px;align-items:center}
+  .toast{background:var(--ink);color:#fff;padding:12px 20px;border-radius:10px;font-size:13.5px;
+         box-shadow:0 8px 24px rgba(0,0,0,.2);max-width:90vw;animation:tin .2s ease}
+  .toast.ok{background:var(--ok)}
+  .toast.bad{background:var(--bad)}
+  @keyframes tin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* ---------- modal ---------- */
+  .modal-bg{position:fixed;inset:0;background:rgba(22,70,85,.5);display:flex;align-items:center;
+            justify-content:center;z-index:1000;padding:20px}
+  .modal{background:#fff;border-radius:14px;padding:22px;max-width:420px;width:100%}
+  .modal h3{margin:0 0 16px;color:var(--teal-deep)}
+  .modal .row{justify-content:flex-end;margin-top:8px}
+
+  .empty{color:var(--muted);font-size:13.5px;text-align:center;padding:18px}
+  .hint{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .daypreview{font-weight:700;color:var(--teal)}
 </style>
 </head>
 <body>
 
-<!-- LOGIN PAGE -->
-<div id="loginPage" class="login-page">
-  <div class="login-box" id="loginBox">
-    <div class="login-logo">
-      <img src="data:image/jpeg;base64,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" alt="Vertex">
-      <div>
-        <div class="login-title">Vertex Global Trade</div>
-        <div class="login-subtitle">Sistema de Gestión de Vacaciones</div>
+<!-- ============ LOGIN ============ -->
+<div id="screen-login" class="auth">
+  <div class="card">
+    <div class="logo" id="loginLogo">AV</div>
+    <h1>Vertex Global Trade</h1>
+    <p class="sub">Gestión de Vacaciones</p>
+
+    <div id="loginForm">
+      <div class="field">
+        <label>Correo electrónico</label>
+        <input id="liEmail" type="email" placeholder="nombre@vertexglobaltrade.com" autocomplete="username" />
+      </div>
+      <div class="field">
+        <label>Contraseña</label>
+        <input id="liPass" type="password" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+      <button class="btn" id="btnLogin">Entrar</button>
+      <div class="link">
+        <a id="linkFirst">Primera vez / He olvidado mi contraseña</a>
       </div>
     </div>
 
-    <!-- LOGIN FORM -->
-    <div id="formLogin">
-      <div class="login-h">Bienvenido</div>
-      <div class="login-desc">Accede con tu email corporativo</div>
-      <div class="msg-err" id="loginErr"></div>
-      <div class="field"><label>Email corporativo</label><input type="email" id="loginEmail" placeholder="tu@vertexglobaltrade.com" autocomplete="email"></div>
-      <div class="field"><label>Contraseña</label><input type="password" id="loginPass" placeholder="Tu contraseña" autocomplete="current-password"></div>
-      <button class="btn-main" id="btnLogin" onclick="doLogin()">Entrar</button>
-      <div class="login-link"><a onclick="showForm(&#39;first&#39;)">Primera vez aquí · Crear contraseña</a></div>
-    </div>
-
-    <!-- FIRST TIME FORM -->
-    <div id="formFirst" style="display:none">
-      <div class="login-h">Primera vez</div>
-      <div class="login-desc">Te enviaremos un enlace para crear tu contraseña</div>
-      <div class="msg-err" id="firstErr"></div>
-      <div class="msg-ok" id="firstOk"></div>
-      <div class="field"><label>Tu email corporativo</label><input type="email" id="firstEmail" placeholder="tu@vertexglobaltrade.com"></div>
-      <button class="btn-main" id="btnFirst" onclick="doRequestPassword()">Enviar enlace</button>
-      <div class="login-link"><a onclick="showForm(&#39;login&#39;)">← Volver al login</a></div>
-    </div>
-
-    <!-- SET PASSWORD FORM -->
-    <div id="formSetPass" style="display:none">
-      <div class="login-h">Crea tu contraseña</div>
-      <div class="login-desc">Elige una contraseña segura (mínimo 6 caracteres)</div>
-      <div class="msg-err" id="setPassErr"></div>
-      <div class="msg-ok" id="setPassOk"></div>
-      <div class="field"><label>Nueva contraseña</label><input type="password" id="newPass1" placeholder="Mínimo 6 caracteres"></div>
-      <div class="field"><label>Repite la contraseña</label><input type="password" id="newPass2" placeholder="Repite la contraseña"></div>
-      <button class="btn-main" id="btnSetPass" onclick="doSetPassword()">Guardar contraseña</button>
+    <!-- pedir enlace de contraseña -->
+    <div id="forgotForm" class="hidden">
+      <p class="sub">Introduce tu correo y te enviaremos un enlace para crear tu contraseña.</p>
+      <div class="field">
+        <label>Correo electrónico</label>
+        <input id="fgEmail" type="email" placeholder="nombre@vertexglobaltrade.com" />
+      </div>
+      <button class="btn" id="btnForgot">Enviar enlace</button>
+      <div class="link"><a id="linkBack">‹ Volver a iniciar sesión</a></div>
     </div>
   </div>
 </div>
 
-<!-- APP -->
-<div id="appPage" style="display:none">
-  <div class="topbar">
-    <div class="logo-wrap">
-      <img class="logo-img" src="data:image/jpeg;base64,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" alt="Vertex">
-      <div><div class="logo-text">Vertex</div><div class="logo-sub">Global Trade</div></div>
+<!-- ============ CREAR CONTRASEÑA (token en URL) ============ -->
+<div id="screen-setpw" class="auth hidden">
+  <div class="card">
+    <div class="logo">AV</div>
+    <h1>Crear contraseña</h1>
+    <p class="sub">Define tu contraseña para acceder a la app.</p>
+    <div class="field">
+      <label>Nueva contraseña</label>
+      <input id="spPass" type="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
     </div>
-    <div class="topbar-right">
-      <div class="sync-status"><div class="sync-dot" id="syncDot"></div><span id="syncLabel">Cargando...</span></div>
-      <div class="user-info">Hola, <span class="user-email" id="topEmail"></span></div>
-      <button class="btn-logout" onclick="doLogout()">Cerrar sesión</button>
+    <div class="field">
+      <label>Repetir contraseña</label>
+      <input id="spPass2" type="password" placeholder="Repite la contraseña" autocomplete="new-password" />
     </div>
+    <button class="btn" id="btnSetPw">Guardar contraseña</button>
+    <div class="link"><a id="linkToLogin">‹ Ir a iniciar sesión</a></div>
   </div>
+</div>
 
-  <div class="content">
-    <!-- ADMIN VIEW -->
-    <div id="adminView" class="page">
-      <div class="stats-row">
-        <div class="stat-card"><div class="stat-icon" style="background:var(--teal-lite)">📅</div><div><div class="stat-num" id="statTotal" style="color:var(--teal)">0</div><div class="stat-label">Días solicitados este año</div></div></div>
-        <div class="stat-card"><div class="stat-icon" style="background:var(--green-bg)">✅</div><div><div class="stat-num" id="statApproved" style="color:var(--green)">0</div><div class="stat-label">Días aprobados</div></div></div>
-        <div class="stat-card"><div class="stat-icon" style="background:var(--yellow-bg)">⏳</div><div><div class="stat-num" id="statPending" style="color:var(--yellow)">0</div><div class="stat-label">Pendientes de aprobar</div></div></div>
+<!-- ============ VISTA TRABAJADOR ============ -->
+<div id="screen-worker" class="hidden">
+  <header class="bar">
+    <div class="logo">AV</div>
+    <div class="brand">Vertex Vacaciones<small>Mis vacaciones</small></div>
+    <div class="spacer"></div>
+    <div class="who"><b id="wkName">—</b><span id="wkEmail">—</span></div>
+    <button class="btn ghost sm" onclick="logout()">Salir</button>
+  </header>
+
+  <div class="wrap">
+    <div class="banner">
+      <div class="nums">
+        <div class="num"><b id="wkUsed">0</b><span>días usados</span></div>
+        <div class="num"><b id="wkRemain">22</b><span>días restantes</span></div>
+        <div class="num"><b id="wkPending">0</b><span>pendientes</span></div>
+        <div class="num"><b id="wkTotal">22</b><span>total año</span></div>
       </div>
-      <div class="section-header">
-        <div class="section-title">Equipo · Estado de vacaciones</div>
-        <button class="btn add-w" onclick="openWorkerModal(&#39;add&#39;)">+ Añadir trabajador</button>
-      </div>
-      <div class="grid" id="workersGrid"></div>
-      <div class="panel">
-        <div class="panel-title">Historial de vacaciones</div>
-        <div class="filter-row">
-          <div class="filter-btns">
-            <button class="filter-btn active" onclick="setFilter(&#39;all&#39;,this)">Todos</button>
-            <button class="filter-btn" onclick="setFilter(&#39;pending&#39;,this)">Pendientes</button>
-            <button class="filter-btn" onclick="setFilter(&#39;approved&#39;,this)">Aprobadas</button>
-            <button class="filter-btn" onclick="setFilter(&#39;rejected&#39;,this)">Rechazadas</button>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <select id="exportWorker" style="padding:6px 10px;font-size:11px;border-radius:7px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:&#39;Lato&#39;,sans-serif;outline:none;"></select>
-            <button class="btn" style="padding:7px 14px;font-size:11px" onclick="exportPDF()">⬇ PDF</button>
-          </div>
-        </div>
-        <table class="entries-table"><thead><tr><th>Trabajador</th><th>Inicio</th><th>Fin</th><th>Días</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="adminEntriesBody"></tbody></table>
-        <div class="empty" id="adminEmpty" style="display:none">No hay registros para este filtro.</div>
-      </div>
+      <div class="progress"><i id="wkBar" style="width:0%"></i></div>
     </div>
 
-    <!-- WORKER VIEW -->
-    <div id="workerView" class="page">
-      <div class="my-days-banner">
-        <div><div class="my-days-num" id="myDaysUsed">0</div><div class="my-days-label">días usados</div></div>
-        <div class="my-days-bar-wrap">
-          <div class="my-days-name" id="myName"></div>
-          <div class="my-days-label" id="myDaysLeft"></div>
-          <div class="my-bar-bg"><div class="my-bar-fill" id="myBarFill" style="width:0%"></div></div>
+    <div class="card">
+      <h2>Solicitar vacaciones</h2>
+      <div class="row">
+        <div class="field" style="flex:1;min-width:160px">
+          <label>Fecha inicio</label>
+          <input id="vacInicio" type="date" />
         </div>
-        <div style="text-align:right"><div style="font-family:Montserrat,sans-serif;font-size:11px;color:rgba(255,255,255,0.6)">Año <span id="myYear"></span></div><div style="font-family:Montserrat,sans-serif;font-size:22px;font-weight:800;color:var(--teal-mid)" id="myDaysTotal">22</div><div style="font-size:11px;color:rgba(255,255,255,0.6)">días totales</div></div>
-      </div>
-      <div class="panel">
-        <div class="panel-title">Solicitar vacaciones</div>
-        <div class="form-row two">
-          <div><label>Fecha inicio</label><input type="date" id="myStart"></div>
-          <div><label>Fecha fin</label><input type="date" id="myEnd"></div>
-          <div><button class="btn" id="btnMyAdd" onclick="addMyEntry()" style="margin-top:0">Solicitar</button></div>
+        <div class="field" style="flex:1;min-width:160px">
+          <label>Fecha fin</label>
+          <input id="vacFin" type="date" />
         </div>
-        <div class="form-err" id="myErr"></div>
+        <div class="field" style="display:flex;align-items:flex-end">
+          <button class="btn" id="btnRequest">Solicitar</button>
+        </div>
       </div>
-      <div class="panel">
-        <div class="panel-title">Mis solicitudes</div>
-        <table class="entries-table"><thead><tr><th>Inicio</th><th>Fin</th><th>Días</th><th>Estado</th><th></th></tr></thead><tbody id="myEntriesBody"></tbody></table>
-        <div class="empty" id="myEmpty" style="display:none">No tienes solicitudes aún.</div>
+      <div class="hint" id="vacPreview">Selecciona fechas para calcular los días laborables (excluye sábados y domingos).</div>
+    </div>
+
+    <div class="card">
+      <h2>Mis solicitudes</h2>
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th>Inicio</th><th>Fin</th><th>Días</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="wkRows"></tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
 
-<!-- WORKER MODAL -->
-<div class="modal-bg" id="workerModal">
-  <div class="modal">
-    <h3 id="workerModalTitle">Añadir trabajador</h3>
-    <div class="modal-field"><label>Nombre completo</label><input type="text" id="wModalName" placeholder="Nombre Apellido"></div>
-    <div class="modal-field"><label>Email corporativo</label><input type="email" id="wModalEmail" placeholder="nombre@vertexglobaltrade.com"></div>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeWorkerModal()">Cancelar</button>
-      <button class="btn" id="wModalSave" onclick="saveWorker()">Guardar</button>
+<!-- ============ VISTA ADMIN ============ -->
+<div id="screen-admin" class="hidden">
+  <header class="bar">
+    <div class="logo">AV</div>
+    <div class="brand">Vertex Vacaciones<small>Panel de administración</small></div>
+    <div class="spacer"></div>
+    <div class="who"><b id="adName">Administrador</b><span id="adEmail">—</span></div>
+    <button class="btn ghost sm" onclick="logout()">Salir</button>
+  </header>
+
+  <div class="wrap">
+    <div class="stats" style="margin-bottom:20px">
+      <div class="stat"><b id="stReq">0</b><span>días solicitados</span></div>
+      <div class="stat"><b id="stApp">0</b><span>días aprobados</span></div>
+      <div class="stat"><b id="stPen">0</b><span>días pendientes</span></div>
+      <div class="stat"><b id="stRej">0</b><span>días rechazados</span></div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <h2 style="margin:0;flex:1">Trabajadores</h2>
+        <button class="btn outline sm" id="btnExportTeam">Exportar equipo (PDF)</button>
+        <button class="btn sm" id="btnAddWorker">+ Añadir trabajador</button>
+      </div>
+      <div class="workers" id="adWorkers" style="margin-top:16px"></div>
+    </div>
+
+    <div class="card">
+      <h2>Historial de solicitudes</h2>
+      <div class="filters" id="adFilters">
+        <span class="chip active" data-f="todos">Todos</span>
+        <span class="chip" data-f="pendiente">Pendientes</span>
+        <span class="chip" data-f="aprobada">Aprobados</span>
+        <span class="chip" data-f="rechazada">Rechazados</span>
+      </div>
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th>Trabajador</th><th>Inicio</th><th>Fin</th><th>Días</th><th>Estado</th><th>Acciones</th></tr></thead>
+          <tbody id="adRows"></tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- modal host -->
+<div id="modalHost"></div>
+<div id="toast"></div>
 
 <script>
-// ── CONFIG ────────────────────────────────────────────────
+/* ====================================================================
+ *  CONFIGURACIÓN
+ * ================================================================= */
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxkb643V3HVde1B95yyTzvGxkwi8vUMkRTWjNPDe0-lbbspatQYnVP_Fs2Nv7KDrwqyuA/exec';
-const DAYS_PER_YEAR = 22;
-const ADMIN_EMAIL = 'info@vertexglobaltrade.com';
-const currentYear = new Date().getFullYear();
+const SALT = 'vertex_salt_2025';
+const SESSION_KEY = 'vertex_session';
 
-const COLORS = [
-  {bg:'#d4edf1',text:'#1f5f70'},{bg:'#c0e5eb',text:'#164655'},
-  {bg:'#b3d8df',text:'#1a4f5d'},{bg:'#a1cdd6',text:'#123a47'},
-  {bg:'#8fc2cd',text:'#0e2d38'},{bg:'#d6eef2',text:'#236070'},
-  {bg:'#e2f2f5',text:'#2a7080'},{bg:'#e8f4f6',text:'#2d7d8f'},
-];
+/* Si tienes el logo en base64, pégalo aquí (data:image/jpeg;base64,....) y se mostrará como imagen. */
+const LOGO_BASE64 = '';
 
-let session = JSON.parse(localStorage.getItem('vgt_session') || 'null');
-let workers = [], entries = [], currentFilter = 'all', editingWId = null;
-let myWorker = null, myEntries = [];
+let CURRENT = null;          // { token, email, role }
+let ADMIN_FILTER = 'todos';
+let ADMIN_CACHE = null;      // últimos datos admin (para exportar PDF)
+let WORKER_SUMMARY = null;   // resumen del trabajador (para validar el límite de 22)
 
-// ── HELPERS ───────────────────────────────────────────────
-function ini(n){return (n||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
-function col(email){const h=Array.from(email||'').reduce((a,c)=>a+c.charCodeAt(0),0);return COLORS[h%COLORS.length];}
-function fmt(d){if(!d)return'—';try{return new Date(String(d).substring(0,10)+'T12:00:00').toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'});}catch(e){return d;}}
-function businessDays(s,e){let n=0,c=new Date(s),l=new Date(e);while(c<=l){const d=c.getDay();if(d&&d!==6)n++;c.setDate(c.getDate()+1);}return n;}
-function daysUsed(email){return entries.filter(e=>String(e.workerEmail).toLowerCase()===email.toLowerCase()&&e.status!=='rejected'&&new Date(e.start).getFullYear()===currentYear).reduce((s,e)=>s+Number(e.days),0);}
-function setSyncStatus(state,label){document.getElementById('syncDot').className='sync-dot '+state;document.getElementById('syncLabel').textContent=label;}
+/* ====================================================================
+ *  JSONP — evita CORS usando <script> dinámico
+ * ================================================================= */
+function callAPI(params) {
+  return new Promise((resolve, reject) => {
+    const cbName = 'cb_' + Math.random().toString(36).slice(2);
+    const s = document.createElement('script');
+    const timeout = setTimeout(() => { cleanup(); reject(new Error('Tiempo de espera agotado. Revisa tu conexión.')); }, 20000);
 
-async function api(params){
-  const url=WEB_APP_URL+'?'+new URLSearchParams({...params,token:session?.token||''});
-  const res=await fetch(url,{redirect:'follow'});
-  return res.json();
-}
-async function apiPost(body){
-  const payload=JSON.stringify({...body,token:session?.token||''});
-  // Use no-cors GET with encoded body as fallback for CORS issues
-  const url=WEB_APP_URL+'?payload='+encodeURIComponent(payload);
-  const res=await fetch(url,{redirect:'follow'});
-  return res.json();
-}
-
-// ── LOGIN FORMS ───────────────────────────────────────────
-function showForm(f){
-  ['formLogin','formFirst','formSetPass'].forEach(id=>document.getElementById(id).style.display='none');
-  document.getElementById('form'+f.charAt(0).toUpperCase()+f.slice(1)).style.display='block';
-}
-
-function showErr(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';}
-function showOk(id,msg){const el=document.getElementById(id);el.textContent=msg;el.style.display='block';}
-function hideMsg(id){document.getElementById(id).style.display='none';}
-
-async function doLogin(){
-  const email=document.getElementById('loginEmail').value.trim().toLowerCase();
-  const pass=document.getElementById('loginPass').value;
-  if(!email||!pass){showErr('loginErr','Introduce email y contraseña.');return;}
-  const btn=document.getElementById('btnLogin');
-  btn.innerHTML='<span class="spinner"></span>Entrando...';btn.disabled=true;
-  hideMsg('loginErr');
-  try{
-    const res=await apiPost({action:'login',email,password:pass});
-    if(res.ok){
-      session={token:res.token,email:res.email,isAdmin:res.isAdmin};
-      localStorage.setItem('vgt_session',JSON.stringify(session));
-      startApp();
-    } else {
-      showErr('loginErr',res.error||'Error al iniciar sesión');
+    function cleanup() {
+      clearTimeout(timeout);
+      delete window[cbName];
+      if (s.parentNode) s.parentNode.removeChild(s);
     }
-  }catch(e){showErr('loginErr','Error de conexión. Inténtalo de nuevo.');}
-  btn.innerHTML='Entrar';btn.disabled=false;
+    window[cbName] = (data) => { cleanup(); resolve(data); };
+    s.onerror = () => { cleanup(); reject(new Error('No se pudo contactar con el servidor.')); };
+
+    const qs = new URLSearchParams(Object.assign({}, params, { callback: cbName }));
+    s.src = WEB_APP_URL + '?' + qs.toString();
+    document.head.appendChild(s);
+  });
+}
+// azúcar: api('login', {...}) -> añade action
+function api(action, params) { return callAPI(Object.assign({ action }, params || {})); }
+
+/* ====================================================================
+ *  HASH de contraseña (SHA-256 + salt) en el cliente
+ * ================================================================= */
+async function hashPassword(pw) {
+  const data = new TextEncoder().encode(SALT + pw);
+  const buf = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-async function doRequestPassword(){
-  const email=document.getElementById('firstEmail').value.trim().toLowerCase();
-  if(!email){showErr('firstErr','Introduce tu email.');return;}
-  const btn=document.getElementById('btnFirst');
-  btn.innerHTML='<span class="spinner"></span>Enviando...';btn.disabled=true;
-  hideMsg('firstErr');hideMsg('firstOk');
-  try{
-    const res=await apiPost({action:'requestPasswordSetup',email});
-    if(res.ok){
-      showOk('firstOk','¡Email enviado! Revisa tu bandeja de entrada y sigue el enlace.');
-    } else {
-      showErr('firstErr',res.error||'Error al enviar el email');
-    }
-  }catch(e){showErr('firstErr','Error de conexión.');}
-  btn.innerHTML='Enviar enlace';btn.disabled=false;
+/* ====================================================================
+ *  UTILIDADES UI
+ * ================================================================= */
+const $ = (id) => document.getElementById(id);
+function show(id) {
+  ['screen-login', 'screen-setpw', 'screen-worker', 'screen-admin']
+    .forEach(s => $(s).classList.toggle('hidden', s !== id));
+}
+function toast(msg, type) {
+  const t = document.createElement('div');
+  t.className = 'toast' + (type ? ' ' + type : '');
+  t.textContent = msg;
+  $('toast').appendChild(t);
+  setTimeout(() => t.remove(), 4200);
+}
+function busy(btn, on, textOn) {
+  if (!btn) return;
+  if (on) { btn.dataset.txt = btn.textContent; btn.disabled = true; btn.textContent = textOn || 'Procesando…'; }
+  else { btn.disabled = false; btn.textContent = btn.dataset.txt || btn.textContent; }
+}
+function fmtDate(str) {
+  if (!str) return '';
+  const p = String(str).split('-');
+  if (p.length !== 3) return str;
+  return `${p[2].padStart(2,'0')}/${p[1].padStart(2,'0')}/${p[0]}`;
+}
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function businessDays(inicio, fin) {
+  if (!inicio || !fin) return 0;
+  const ps = inicio.split('-'), pf = fin.split('-');
+  const s = new Date(+ps[0], +ps[1]-1, +ps[2]);
+  const e = new Date(+pf[0], +pf[1]-1, +pf[2]);
+  if (e < s) return 0;
+  let n = 0; const d = new Date(s);
+  while (d <= e) { const w = d.getDay(); if (w !== 0 && w !== 6) n++; d.setDate(d.getDate()+1); }
+  return n;
+}
+function renderLogos() {
+  if (!LOGO_BASE64) return;
+  document.querySelectorAll('.logo').forEach(el => {
+    el.textContent = '';
+    el.style.background = 'transparent';
+    const img = document.createElement('img');
+    img.src = LOGO_BASE64; img.alt = 'Vertex';
+    img.style.cssText = 'width:100%;height:100%;border-radius:50%;object-fit:cover';
+    el.appendChild(img);
+  });
 }
 
-async function doSetPassword(){
-  const p1=document.getElementById('newPass1').value;
-  const p2=document.getElementById('newPass2').value;
-  if(p1.length<6){showErr('setPassErr','La contraseña debe tener al menos 6 caracteres.');return;}
-  if(p1!==p2){showErr('setPassErr','Las contraseñas no coinciden.');return;}
-  const params=new URLSearchParams(window.location.search);
-  const email=params.get('email'),token=params.get('token');
-  const btn=document.getElementById('btnSetPass');
-  btn.innerHTML='<span class="spinner"></span>Guardando...';btn.disabled=true;
-  hideMsg('setPassErr');
-  try{
-    const res=await apiPost({action:'setPassword',email,token,password:p1});
-    if(res.ok){
-      showOk('setPassOk','¡Contraseña creada! Ya puedes iniciar sesión.');
-      setTimeout(()=>{window.history.replaceState({},'',window.location.pathname);showForm('login');},2000);
-    } else {
-      showErr('setPassErr',res.error||'Error al guardar la contraseña');
-    }
-  }catch(e){showErr('setPassErr','Error de conexión.');}
-  btn.innerHTML='Guardar contraseña';btn.disabled=false;
-}
+/* ====================================================================
+ *  ARRANQUE
+ * ================================================================= */
+window.addEventListener('DOMContentLoaded', () => {
+  renderLogos();
+  wireLogin();
+  wireWorker();
+  wireAdmin();
 
-async function doLogout(){
-  try{await apiPost({action:'logout'});}catch(e){}
-  localStorage.removeItem('vgt_session');
-  session=null;
-  document.getElementById('appPage').style.display='none';
-  document.getElementById('loginPage').style.display='flex';
-  showForm('login');
-}
+  const regToken = new URLSearchParams(location.search).get('token');
+  if (regToken) { openSetPassword(regToken); return; }
 
-// ── APP INIT ─────────────────────────────────────────────
-async function startApp(){
-  document.getElementById('loginPage').style.display='none';
-  document.getElementById('appPage').style.display='block';
-  document.getElementById('topEmail').textContent=session.email;
-  document.getElementById('myYear').textContent=currentYear;
-  if(session.isAdmin){
-    document.getElementById('adminView').classList.add('active');
-    await loadAdminData();
-  } else {
-    document.getElementById('workerView').classList.add('active');
-    await loadWorkerData();
+  const saved = localStorage.getItem(SESSION_KEY);
+  if (saved) { restoreSession(saved); }
+  else { show('screen-login'); }
+});
+
+async function restoreSession(token) {
+  try {
+    const r = await api('validateSession', { token });
+    if (r.ok) { CURRENT = { token, email: r.email, role: r.role }; routeDashboard(); }
+    else { localStorage.removeItem(SESSION_KEY); show('screen-login'); }
+  } catch (e) {
+    show('screen-login');
   }
 }
 
-async function loadAdminData(){
-  setSyncStatus('loading','Cargando...');
-  try{
-    const data=await api({action:'getAll'});
-    workers=data.workers||[];
-    entries=(data.entries||[]).map(e=>({...e,days:Number(e.days)}));
-    renderAdmin();
-    setSyncStatus('ok','Sincronizado');
-  }catch(e){setSyncStatus('err','Error de conexión');}
+function routeDashboard() {
+  if (CURRENT.role === 'admin') { show('screen-admin'); loadAdmin(); }
+  else { show('screen-worker'); loadWorker(); }
 }
 
-async function loadWorkerData(){
-  setSyncStatus('loading','Cargando...');
-  try{
-    const data=await api({action:'getMyData'});
-    myWorker=data.worker;
-    myEntries=(data.entries||[]).map(e=>({...e,days:Number(e.days)}));
-    renderWorker();
-    setSyncStatus('ok','Sincronizado');
-  }catch(e){setSyncStatus('err','Error de conexión');}
+function logout() {
+  const token = CURRENT && CURRENT.token;
+  localStorage.removeItem(SESSION_KEY);
+  CURRENT = null;
+  if (token) api('logout', { token }).catch(() => {});
+  // limpia el token de la URL si lo hubiera
+  history.replaceState(null, '', location.pathname);
+  show('screen-login');
 }
 
-// ── ADMIN RENDER ──────────────────────────────────────────
-function renderAdmin(){renderWorkerGrid();renderAdminEntries();renderAdminStats();renderExportSelect();}
+/* ====================================================================
+ *  LOGIN / RECUPERAR / CREAR CONTRASEÑA
+ * ================================================================= */
+function wireLogin() {
+  $('btnLogin').onclick = doLogin;
+  $('liPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  $('liEmail').addEventListener('keydown', e => { if (e.key === 'Enter') $('liPass').focus(); });
 
-function renderWorkerGrid(){
-  const g=document.getElementById('workersGrid');
-  if(!workers.length){g.innerHTML='<div class="empty">No hay trabajadores.</div>';return;}
-  g.innerHTML=workers.map(w=>{
-    const used=daysUsed(w.email),pct=Math.min(100,(used/DAYS_PER_YEAR)*100);
-    const c=col(w.email),bar=pct>=90?'var(--red)':pct>=70?'var(--yellow)':'var(--teal)';
-    return `<div class="worker-card">
-      <div class="worker-header">
-        <div class="avatar" style="background:${c.bg};color:${c.text}">${ini(w.name)}</div>
-        <div style="flex:1;min-width:0"><div class="worker-name" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${w.name}</div><div class="worker-email">${w.email}</div></div>
-        <div class="worker-actions">
-          <button class="icon-btn" title="Editar" onclick="openWorkerModal('edit','${w.id}')">✏️</button>
-          <button class="icon-btn del" title="Eliminar" onclick="delWorker('${w.id}')">🗑️</button>
-        </div>
+  $('linkFirst').onclick = () => { $('loginForm').classList.add('hidden'); $('forgotForm').classList.remove('hidden'); $('fgEmail').value = $('liEmail').value; };
+  $('linkBack').onclick  = () => { $('forgotForm').classList.add('hidden'); $('loginForm').classList.remove('hidden'); };
+  $('btnForgot').onclick = doForgot;
+
+  $('btnSetPw').onclick = doSetPassword;
+  $('linkToLogin').onclick = () => { history.replaceState(null, '', location.pathname); show('screen-login'); };
+}
+
+async function doLogin() {
+  const email = $('liEmail').value.trim().toLowerCase();
+  const pass = $('liPass').value;
+  if (!email || !pass) return toast('Introduce correo y contraseña.', 'bad');
+  busy($('btnLogin'), true, 'Entrando…');
+  try {
+    const hash = await hashPassword(pass);
+    const r = await api('login', { email, hash });
+    if (!r.ok) return toast(r.error || 'No se pudo iniciar sesión.', 'bad');
+    CURRENT = { token: r.token, email: r.email, role: r.role };
+    localStorage.setItem(SESSION_KEY, r.token);
+    $('liPass').value = '';
+    routeDashboard();
+  } catch (e) { toast(e.message, 'bad'); }
+  finally { busy($('btnLogin'), false); }
+}
+
+async function doForgot() {
+  const email = $('fgEmail').value.trim().toLowerCase();
+  if (!email) return toast('Introduce tu correo.', 'bad');
+  busy($('btnForgot'), true, 'Enviando…');
+  try {
+    const r = await api('requestPasswordSetup', { email });
+    if (!r.ok) return toast(r.error || 'No se pudo enviar el enlace.', 'bad');
+    toast(r.message || 'Revisa tu correo.', 'ok');
+    $('forgotForm').classList.add('hidden'); $('loginForm').classList.remove('hidden');
+  } catch (e) { toast(e.message, 'bad'); }
+  finally { busy($('btnForgot'), false); }
+}
+
+let SETPW_TOKEN = null;
+function openSetPassword(token) { SETPW_TOKEN = token; show('screen-setpw'); }
+
+async function doSetPassword() {
+  const p1 = $('spPass').value, p2 = $('spPass2').value;
+  if (p1.length < 6) return toast('La contraseña debe tener al menos 6 caracteres.', 'bad');
+  if (p1 !== p2) return toast('Las contraseñas no coinciden.', 'bad');
+  busy($('btnSetPw'), true, 'Guardando…');
+  try {
+    const hash = await hashPassword(p1);
+    const r = await api('setPassword', { token: SETPW_TOKEN, hash });
+    if (!r.ok) return toast(r.error || 'No se pudo guardar la contraseña.', 'bad');
+    CURRENT = { token: r.token, email: r.email, role: r.role };
+    localStorage.setItem(SESSION_KEY, r.token);
+    history.replaceState(null, '', location.pathname);   // quita ?token de la URL
+    toast('Contraseña creada. ¡Bienvenido/a!', 'ok');
+    routeDashboard();
+  } catch (e) { toast(e.message, 'bad'); }
+  finally { busy($('btnSetPw'), false); }
+}
+
+/* ====================================================================
+ *  VISTA TRABAJADOR
+ * ================================================================= */
+function wireWorker() {
+  $('vacInicio').min = todayStr();
+  $('vacFin').min = todayStr();
+  $('vacInicio').addEventListener('change', () => { $('vacFin').min = $('vacInicio').value || todayStr(); updatePreview(); });
+  $('vacFin').addEventListener('change', updatePreview);
+  $('btnRequest').onclick = doRequestVacation;
+}
+
+function updatePreview() {
+  const i = $('vacInicio').value, f = $('vacFin').value;
+  const n = businessDays(i, f);
+  if (!i || !f) { $('vacPreview').innerHTML = 'Selecciona fechas para calcular los días laborables (excluye sábados y domingos).'; return; }
+  if (n <= 0) { $('vacPreview').innerHTML = '<span style="color:var(--bad)">El rango no es válido (la fecha fin debe ser posterior o igual al inicio).</span>'; return; }
+  const disp = WORKER_SUMMARY ? Math.max(0, WORKER_SUMMARY.total - WORKER_SUMMARY.used - WORKER_SUMMARY.pending) : null;
+  if (disp !== null && n > disp) {
+    $('vacPreview').innerHTML = `<span style="color:var(--bad)">Pides <b>${n}</b> día(s) pero solo te quedan <b>${disp}</b> disponible(s) (de ${WORKER_SUMMARY.total}, contando aprobados y pendientes).</span>`;
+    return;
+  }
+  $('vacPreview').innerHTML = `Se solicitarán <span class="daypreview">${n} día(s) laborable(s)</span> (sin sábados ni domingos)` +
+    (disp !== null ? ` · te quedarán <b>${disp - n}</b> disponible(s).` : '.');
+}
+
+async function loadWorker() {
+  try {
+    const r = await api('getWorkerData', { token: CURRENT.token });
+    if (!r.ok) { if (sessionExpired(r)) return; return toast(r.error || 'Error al cargar.', 'bad'); }
+    $('wkName').textContent = r.name;
+    $('wkEmail').textContent = r.email;
+    const s = r.summary;
+    WORKER_SUMMARY = s;
+    $('wkUsed').textContent = s.used;
+    $('wkRemain').textContent = s.remaining;
+    $('wkPending').textContent = s.pending;
+    $('wkTotal').textContent = s.total;
+    $('wkBar').style.width = Math.min(100, Math.round(s.used / s.total * 100)) + '%';
+    renderWorkerRows(r.requests);
+  } catch (e) { toast(e.message, 'bad'); }
+}
+
+function renderWorkerRows(rows) {
+  const tb = $('wkRows');
+  if (!rows.length) { tb.innerHTML = '<tr><td colspan="5"><div class="empty">Todavía no tienes solicitudes.</div></td></tr>'; return; }
+  tb.innerHTML = rows.map(v => `
+    <tr>
+      <td>${fmtDate(v.inicio)}</td>
+      <td>${fmtDate(v.fin)}</td>
+      <td>${v.dias}</td>
+      <td><span class="badge ${v.estado}">${cap(v.estado)}</span></td>
+      <td>${v.estado === 'pendiente'
+        ? `<button class="btn gray sm" onclick="cancelVac('${v.id}')">Cancelar</button>` : ''}</td>
+    </tr>`).join('');
+}
+
+async function doRequestVacation() {
+  const inicio = $('vacInicio').value, fin = $('vacFin').value;
+  if (!inicio || !fin) return toast('Selecciona fecha de inicio y fin.', 'bad');
+  const n = businessDays(inicio, fin);
+  if (n <= 0) return toast('El rango de fechas no es válido.', 'bad');
+  if (WORKER_SUMMARY) {
+    const disp = Math.max(0, WORKER_SUMMARY.total - WORKER_SUMMARY.used - WORKER_SUMMARY.pending);
+    if (n > disp) return toast(`Solo te quedan ${disp} día(s) disponible(s) y pides ${n}. Máximo ${WORKER_SUMMARY.total} al año.`, 'bad');
+  }
+  busy($('btnRequest'), true, 'Enviando…');
+  try {
+    const r = await api('requestVacation', { token: CURRENT.token, inicio, fin });
+    if (!r.ok) { if (sessionExpired(r)) return; return toast(r.error || 'No se pudo solicitar.', 'bad'); }
+    toast(r.message || 'Solicitud enviada.', 'ok');
+    $('vacInicio').value = ''; $('vacFin').value = ''; updatePreview();
+    loadWorker();
+  } catch (e) { toast(e.message, 'bad'); }
+  finally { busy($('btnRequest'), false); }
+}
+
+async function cancelVac(id) {
+  if (!confirm('¿Cancelar esta solicitud pendiente?')) return;
+  try {
+    const r = await api('cancelVacation', { token: CURRENT.token, id });
+    if (!r.ok) { if (sessionExpired(r)) return; return toast(r.error || 'No se pudo cancelar.', 'bad'); }
+    toast(r.message || 'Solicitud cancelada.', 'ok');
+    loadWorker();
+  } catch (e) { toast(e.message, 'bad'); }
+}
+
+/* ====================================================================
+ *  VISTA ADMIN
+ * ================================================================= */
+function wireAdmin() {
+  $('adFilters').querySelectorAll('.chip').forEach(ch => {
+    ch.onclick = () => {
+      $('adFilters').querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      ch.classList.add('active');
+      ADMIN_FILTER = ch.dataset.f;
+      if (ADMIN_CACHE) renderAdminRows(ADMIN_CACHE.requests);
+    };
+  });
+  $('btnAddWorker').onclick = () => openWorkerModal();
+  $('btnExportTeam').onclick = exportTeamPDF;
+}
+
+async function loadAdmin() {
+  $('adEmail').textContent = CURRENT.email;
+  try {
+    const r = await api('getAdminData', { token: CURRENT.token });
+    if (!r.ok) { if (sessionExpired(r)) return; return toast(r.error || 'Error al cargar.', 'bad'); }
+    ADMIN_CACHE = r;
+    $('stReq').textContent = r.stats.requested;
+    $('stApp').textContent = r.stats.approved;
+    $('stPen').textContent = r.stats.pending;
+    $('stRej').textContent = r.stats.rejected;
+    renderWorkers(r.workers);
+    renderAdminRows(r.requests);
+  } catch (e) { toast(e.message, 'bad'); }
+}
+
+function renderWorkers(workers) {
+  const host = $('adWorkers');
+  if (!workers.length) { host.innerHTML = '<div class="empty">No hay trabajadores.</div>'; return; }
+  host.innerHTML = workers.map(w => {
+    const s = w.summary;
+    const pct = Math.min(100, Math.round(s.used / s.total * 100));
+    return `<div class="wcard">
+      <div class="nm">${esc(w.name)}</div>
+      <div class="em">${esc(w.email)}</div>
+      <div class="mini"><i style="width:${pct}%"></i></div>
+      <div class="info"><b>${s.used}</b> usados · <b>${s.remaining}</b> restantes · <b>${s.pending}</b> pendientes (de ${s.total})</div>
+      <div class="acts">
+        <button class="btn outline sm" onclick='exportWorkerPDF(${JSON.stringify(w.email)},${JSON.stringify(w.name)})'>PDF</button>
+        <button class="btn gray sm" onclick='openWorkerModal(${JSON.stringify(w)})'>Editar</button>
+        <button class="btn bad sm" onclick='delWorker(${JSON.stringify(w.id)},${JSON.stringify(w.name)})'>Eliminar</button>
       </div>
-      <div class="days-bar"><div class="days-fill" style="width:${pct}%;background:${bar}"></div></div>
-      <div class="days-text"><span><b style="color:${bar}">${used}</b> días usados</span><span style="color:var(--teal-dark);font-weight:700">${DAYS_PER_YEAR-used} restantes</span></div>
     </div>`;
   }).join('');
 }
 
-function renderAdminStats(){
-  const yr=entries.filter(e=>new Date(e.start).getFullYear()===currentYear);
-  document.getElementById('statTotal').textContent=yr.reduce((s,e)=>s+e.days,0);
-  document.getElementById('statApproved').textContent=yr.filter(e=>e.status==='approved').reduce((s,e)=>s+e.days,0);
-  document.getElementById('statPending').textContent=yr.filter(e=>e.status==='pending').reduce((s,e)=>s+e.days,0);
+function renderAdminRows(requests) {
+  const rows = ADMIN_FILTER === 'todos' ? requests : requests.filter(v => v.estado === ADMIN_FILTER);
+  const tb = $('adRows');
+  if (!rows.length) { tb.innerHTML = '<tr><td colspan="6"><div class="empty">No hay solicitudes para este filtro.</div></td></tr>'; return; }
+  tb.innerHTML = rows.map(v => `
+    <tr>
+      <td>${esc(v.name)}</td>
+      <td>${fmtDate(v.inicio)}</td>
+      <td>${fmtDate(v.fin)}</td>
+      <td>${v.dias}</td>
+      <td><span class="badge ${v.estado}">${cap(v.estado)}</span></td>
+      <td>
+        ${v.estado === 'pendiente'
+          ? `<button class="btn ok sm" onclick="adminVac('approveVacation','${v.id}')">Aprobar</button>
+             <button class="btn warn sm" onclick="adminVac('rejectVacation','${v.id}')">Rechazar</button>` : ''}
+        <button class="btn bad sm" onclick="adminDeleteVac('${v.id}')">Borrar</button>
+      </td>
+    </tr>`).join('');
 }
 
-function renderExportSelect(){
-  const sel=document.getElementById('exportWorker');
-  sel.innerHTML='<option value="0">— Todos —</option>'+workers.map(w=>`<option value="${w.email}">${w.name}</option>`).join('');
+async function adminVac(action, id) {
+  try {
+    const r = await api(action, { token: CURRENT.token, id });
+    if (!r.ok) { if (sessionExpired(r)) return; return toast(r.error || 'Error.', 'bad'); }
+    toast(r.message || 'Hecho.', 'ok');
+    loadAdmin();
+  } catch (e) { toast(e.message, 'bad'); }
 }
 
-function renderAdminEntries(){
-  const tbody=document.getElementById('adminEntriesBody'),empty=document.getElementById('adminEmpty');
-  const lbl={pending:'Pendiente',approved:'Aprobada',rejected:'Rechazada'};
-  let list=currentFilter==='all'?entries:entries.filter(e=>e.status===currentFilter);
-  list=[...list].reverse();
-  if(!list.length){tbody.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  tbody.innerHTML=list.map(e=>{
-    const w=workers.find(w=>String(w.email).toLowerCase()===String(e.workerEmail).toLowerCase())||{name:e.workerEmail,email:e.workerEmail};
-    const c=col(w.email);
-    const ap=e.status!=='approved'?`<button class="btn sm approve" onclick="chgStatus('${e.id}','approved')">✓</button>`:'';
-    const rj=e.status!=='rejected'?`<button class="btn sm rj" onclick="chgStatus('${e.id}','rejected')">✗</button>`:'';
-    const dl=`<button class="btn sm del" onclick="delEntry('${e.id}')">🗑</button>`;
-    return `<tr><td><div class="name-cell"><div class="mini-av" style="background:${c.bg};color:${c.text}">${ini(w.name)}</div>${w.name}</div></td><td>${fmt(e.start)}</td><td>${fmt(e.end)}</td><td><b>${e.days}</b></td><td><span class="tag ${e.status}">${lbl[e.status]||e.status}</span></td><td>${ap}${rj}${dl}</td></tr>`;
-  }).join('');
+async function adminDeleteVac(id) {
+  if (!confirm('¿Borrar esta solicitud definitivamente?')) return;
+  try {
+    const r = await api('deleteVacation', { token: CURRENT.token, id });
+    if (!r.ok) { if (sessionExpired(r)) return; return toast(r.error || 'Error.', 'bad'); }
+    toast(r.message || 'Solicitud borrada.', 'ok');
+    loadAdmin();
+  } catch (e) { toast(e.message, 'bad'); }
 }
 
-async function chgStatus(id,status){
-  setSyncStatus('loading','Guardando...');
-  await apiPost({action:'updateEntry',id,status});
-  const e=entries.find(e=>String(e.id)===String(id));
-  if(e)e.status=status;
-  renderAdmin();setSyncStatus('ok','Sincronizado ✓');
+/* ---- modal añadir / editar trabajador ---- */
+function openWorkerModal(worker) {
+  const editing = !!worker;
+  const host = $('modalHost');
+  host.innerHTML = `
+    <div class="modal-bg" id="mbg">
+      <div class="modal">
+        <h3>${editing ? 'Editar trabajador' : 'Añadir trabajador'}</h3>
+        <div class="field"><label>Nombre</label><input id="mkName" value="${editing ? esc(worker.name) : ''}" placeholder="Nombre" /></div>
+        <div class="field"><label>Email</label><input id="mkEmail" value="${editing ? esc(worker.email) : ''}" placeholder="nombre@vertexglobaltrade.com" /></div>
+        <div class="row">
+          <button class="btn gray" id="mkCancel">Cancelar</button>
+          <button class="btn" id="mkSave">${editing ? 'Guardar' : 'Añadir'}</button>
+        </div>
+      </div>
+    </div>`;
+  $('mkCancel').onclick = closeModal;
+  $('mbg').onclick = (e) => { if (e.target.id === 'mbg') closeModal(); };
+  $('mkSave').onclick = async () => {
+    const nombre = $('mkName').value.trim();
+    const email = $('mkEmail').value.trim().toLowerCase();
+    if (!nombre || !email) return toast('Nombre y email obligatorios.', 'bad');
+    busy($('mkSave'), true, 'Guardando…');
+    try {
+      const params = editing
+        ? { token: CURRENT.token, id: worker.id, nombre, email }
+        : { token: CURRENT.token, nombre, email };
+      const r = await api(editing ? 'editWorker' : 'addWorker', params);
+      if (!r.ok) { busy($('mkSave'), false); if (sessionExpired(r)) return; return toast(r.error || 'Error.', 'bad'); }
+      toast(r.message || 'Guardado.', 'ok');
+      closeModal();
+      loadAdmin();
+    } catch (e) { busy($('mkSave'), false); toast(e.message, 'bad'); }
+  };
+}
+function closeModal() { $('modalHost').innerHTML = ''; }
+
+async function delWorker(id, name) {
+  if (!confirm(`¿Eliminar a ${name}? Sus solicitudes quedarán en el historial.`)) return;
+  try {
+    const r = await api('deleteWorker', { token: CURRENT.token, id });
+    if (!r.ok) { if (sessionExpired(r)) return; return toast(r.error || 'Error.', 'bad'); }
+    toast(r.message || 'Trabajador eliminado.', 'ok');
+    loadAdmin();
+  } catch (e) { toast(e.message, 'bad'); }
 }
 
-async function delEntry(id){
-  if(!confirm('¿Eliminar este registro?'))return;
-  await apiPost({action:'deleteEntry',id});
-  entries=entries.filter(e=>String(e.id)!==String(id));
-  renderAdmin();
+/* ====================================================================
+ *  EXPORTAR PDF
+ * ================================================================= */
+function pdfDoc() {
+  if (!window.jspdf || !window.jspdf.jsPDF) { toast('No se pudo cargar la librería PDF.', 'bad'); return null; }
+  const doc = new window.jspdf.jsPDF();
+  doc.setFillColor(22, 70, 85);
+  doc.rect(0, 0, 210, 26, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(15);
+  doc.text('Vertex Global Trade — Vacaciones', 14, 17);
+  doc.setTextColor(40, 40, 40);
+  return doc;
 }
 
-function setFilter(f,btn){currentFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAdminEntries();}
-
-// ── WORKER MODAL ──────────────────────────────────────────
-function openWorkerModal(mode,wid){
-  editingWId=wid||null;
-  document.getElementById('workerModalTitle').textContent=mode==='edit'?'Editar trabajador':'Añadir trabajador';
-  if(mode==='edit'&&wid){
-    const w=workers.find(w=>String(w.id)===String(wid));
-    document.getElementById('wModalName').value=w.name;
-    document.getElementById('wModalEmail').value=w.email;
-  } else {
-    document.getElementById('wModalName').value='';
-    document.getElementById('wModalEmail').value='';
-  }
-  document.getElementById('workerModal').classList.add('open');
-}
-function closeWorkerModal(){document.getElementById('workerModal').classList.remove('open');editingWId=null;}
-
-async function saveWorker(){
-  const name=document.getElementById('wModalName').value.trim();
-  const workerEmail=document.getElementById('wModalEmail').value.trim().toLowerCase();
-  if(!name||!workerEmail){alert('Rellena todos los campos.');return;}
-  const btn=document.getElementById('wModalSave');
-  btn.innerHTML='<span class="spinner"></span>';btn.disabled=true;
-  try{
-    if(editingWId){
-      await apiPost({action:'editWorker',id:editingWId,name,workerEmail});
-      const w=workers.find(w=>String(w.id)===String(editingWId));
-      if(w){w.name=name;w.email=workerEmail;}
-    } else {
-      const res=await apiPost({action:'addWorker',name,workerEmail});
-      if(res.ok)workers.push({id:res.id,name,email:workerEmail});
-    }
-    renderAdmin();closeWorkerModal();setSyncStatus('ok','Sincronizado');
-  }catch(e){alert('Error al guardar.');}
-  btn.innerHTML='Guardar';btn.disabled=false;
+function exportWorkerPDF(email, name) {
+  if (!ADMIN_CACHE) return;
+  const doc = pdfDoc(); if (!doc) return;
+  const reqs = ADMIN_CACHE.requests.filter(v => String(v.email).toLowerCase() === String(email).toLowerCase());
+  const w = ADMIN_CACHE.workers.find(x => String(x.email).toLowerCase() === String(email).toLowerCase());
+  doc.setFontSize(12);
+  doc.text(`Trabajador: ${name}`, 14, 36);
+  doc.setFontSize(10);
+  if (w) doc.text(`Usados: ${w.summary.used}  ·  Restantes: ${w.summary.remaining}  ·  Pendientes: ${w.summary.pending}  (de ${w.summary.total})`, 14, 43);
+  doc.autoTable({
+    startY: 49,
+    head: [['Inicio', 'Fin', 'Días', 'Estado']],
+    body: reqs.map(v => [fmtDate(v.inicio), fmtDate(v.fin), v.dias, cap(v.estado)]),
+    headStyles: { fillColor: [45, 125, 143] },
+    styles: { fontSize: 9 }
+  });
+  doc.save(`vacaciones_${slug(name)}.pdf`);
 }
 
-async function delWorker(id){
-  const w=workers.find(w=>String(w.id)===String(id));
-  if(!confirm(`¿Eliminar a ${w.name}?`))return;
-  await apiPost({action:'deleteWorker',id});
-  workers=workers.filter(w=>String(w.id)!==String(id));
-  renderAdmin();
+function exportTeamPDF() {
+  if (!ADMIN_CACHE) return;
+  const doc = pdfDoc(); if (!doc) return;
+  doc.setFontSize(12); doc.text('Resumen del equipo', 14, 36);
+  doc.autoTable({
+    startY: 42,
+    head: [['Trabajador', 'Usados', 'Restantes', 'Pendientes', 'Total']],
+    body: ADMIN_CACHE.workers.map(w => [w.name, w.summary.used, w.summary.remaining, w.summary.pending, w.summary.total]),
+    headStyles: { fillColor: [22, 70, 85] },
+    styles: { fontSize: 9 }
+  });
+  doc.text('Historial de solicitudes', 14, doc.lastAutoTable.finalY + 12);
+  doc.autoTable({
+    startY: doc.lastAutoTable.finalY + 16,
+    head: [['Trabajador', 'Inicio', 'Fin', 'Días', 'Estado']],
+    body: ADMIN_CACHE.requests.map(v => [v.name, fmtDate(v.inicio), fmtDate(v.fin), v.dias, cap(v.estado)]),
+    headStyles: { fillColor: [45, 125, 143] },
+    styles: { fontSize: 9 }
+  });
+  doc.save('vacaciones_equipo.pdf');
 }
 
-// ── WORKER VIEW ───────────────────────────────────────────
-function renderWorker(){
-  if(!myWorker)return;
-  const used=myEntries.filter(e=>e.status!=='rejected'&&new Date(e.start).getFullYear()===currentYear).reduce((s,e)=>s+e.days,0);
-  const pct=Math.min(100,(used/DAYS_PER_YEAR)*100);
-  document.getElementById('myDaysUsed').textContent=used;
-  document.getElementById('myName').textContent=myWorker.name;
-  document.getElementById('myDaysLeft').textContent=`${DAYS_PER_YEAR-used} días restantes`;
-  document.getElementById('myBarFill').style.width=pct+'%';
-  document.getElementById('myDaysTotal').textContent=DAYS_PER_YEAR;
-
-  const lbl={pending:'Pendiente ⏳',approved:'Aprobada ✅',rejected:'Rechazada ❌'};
-  const tbody=document.getElementById('myEntriesBody'),empty=document.getElementById('myEmpty');
-  const list=[...myEntries].reverse();
-  if(!list.length){tbody.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  tbody.innerHTML=list.map(e=>`<tr>
-    <td>${fmt(e.start)}</td><td>${fmt(e.end)}</td><td><b>${e.days}</b></td>
-    <td><span class="tag ${e.status}">${lbl[e.status]||e.status}</span></td>
-    <td>${e.status==='pending'?`<button class="btn sm del" onclick="delMyEntry('${e.id}')">Cancelar</button>`:''}</td>
-  </tr>`).join('');
-}
-
-async function addMyEntry(){
-  const msg=document.getElementById('myErr');msg.style.display='none';
-  const start=document.getElementById('myStart').value,end=document.getElementById('myEnd').value;
-  if(!start||!end){msg.textContent='Introduce las fechas.';msg.style.display='block';return;}
-  if(start>end){msg.textContent='La fecha inicio no puede ser posterior al fin.';msg.style.display='block';return;}
-  const days=businessDays(start,end);
-  const used=myEntries.filter(e=>e.status!=='rejected'&&new Date(e.start).getFullYear()===currentYear).reduce((s,e)=>s+e.days,0);
-  if(used+days>DAYS_PER_YEAR){msg.textContent=`Solo te quedan ${DAYS_PER_YEAR-used} días disponibles.`;msg.style.display='block';return;}
-  const btn=document.getElementById('btnMyAdd');
-  btn.innerHTML='<span class="spinner"></span>';btn.disabled=true;
-  try{
-    const res=await apiPost({action:'addEntry',start,end,days});
-    if(res.ok){
-      myEntries.push({id:res.id,workerEmail:session.email,start,end,days,status:'pending'});
-      renderWorker();
-      document.getElementById('myStart').value='';
-      document.getElementById('myEnd').value='';
-      setSyncStatus('ok','Solicitud enviada ✓');
-    }
-  }catch(e){msg.textContent='Error de conexión.';msg.style.display='block';}
-  btn.innerHTML='Solicitar';btn.disabled=false;
-}
-
-async function delMyEntry(id){
-  if(!confirm('¿Cancelar esta solicitud?'))return;
-  await apiPost({action:'deleteEntry',id});
-  myEntries=myEntries.filter(e=>String(e.id)!==String(id));
-  renderWorker();
-}
-
-// ── EXPORT PDF ────────────────────────────────────────────
-function exportPDF(){
-  const wEmail=document.getElementById('exportWorker').value;
-  const wName=wEmail!=='0'?workers.find(w=>w.email===wEmail)?.name:'Todo el equipo';
-  const lbl={pending:'Pendiente',approved:'Aprobada',rejected:'Rechazada'};
-  let list=wEmail!=='0'?entries.filter(e=>String(e.workerEmail).toLowerCase()===wEmail.toLowerCase()):entries;
-  list=[...list].sort((a,b)=>String(a.start).localeCompare(String(b.start)));
-  const approved=list.filter(e=>e.status==='approved').reduce((s,e)=>s+e.days,0);
-  const total=list.filter(e=>e.status!=='rejected').reduce((s,e)=>s+e.days,0);
-  const rows=list.map(e=>{
-    const w=workers.find(w=>String(w.email).toLowerCase()===String(e.workerEmail).toLowerCase())||{name:e.workerEmail};
-    const sc=e.status==='approved'?'#27ae60':e.status==='rejected'?'#c0392b':'#e6a817';
-    const wc=wEmail!=='0'?'':`<td style="padding:10px 12px;border-bottom:1px solid #eee">${w.name}</td>`;
-    return `<tr>${wc}<td style="padding:10px 12px;border-bottom:1px solid #eee">${fmt(e.start)}</td><td style="padding:10px 12px;border-bottom:1px solid #eee">${fmt(e.end)}</td><td style="padding:10px 12px;border-bottom:1px solid #eee;text-align:center"><b>${e.days}</b></td><td style="padding:10px 12px;border-bottom:1px solid #eee"><span style="background:${sc}18;color:${sc};padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700">${lbl[e.status]||e.status}</span></td></tr>`;
-  }).join('');
-  const wInfo=wEmail!=='0'?workers.find(w=>w.email===wEmail):null;
-  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:'Helvetica Neue',Arial,sans-serif;color:#1a2e33;margin:0;padding:40px}</style></head><body>
-  <div style="display:flex;align-items:center;gap:14px;margin-bottom:32px;padding-bottom:20px;border-bottom:3px solid #164655">
-    <div style="width:48px;height:48px;background:#2d7d8f;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px">AV</div>
-    <div><div style="font-size:20px;font-weight:800;color:#164655">Vertex Global Trade</div><div style="font-size:12px;color:#6b8f96">Informe de Vacaciones · ${currentYear}</div></div>
-    <div style="margin-left:auto;text-align:right"><div style="font-size:13px;font-weight:700">${new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'})}</div></div>
-  </div>
-  <div style="margin-bottom:24px"><div style="font-size:18px;font-weight:700;color:#164655">${wName}</div>${wInfo?`<div style="font-size:13px;color:#6b8f96">${wInfo.email}</div>`:''}</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px">
-    <div style="background:#e8f4f6;border-radius:12px;padding:16px"><div style="font-size:28px;font-weight:800;color:#2d7d8f">${list.length}</div><div style="font-size:12px;color:#6b8f96">Solicitudes</div></div>
-    <div style="background:#eafaf1;border-radius:12px;padding:16px"><div style="font-size:28px;font-weight:800;color:#27ae60">${approved}</div><div style="font-size:12px;color:#6b8f96">Días aprobados</div></div>
-    <div style="background:#e8f4f6;border-radius:12px;padding:16px"><div style="font-size:28px;font-weight:800;color:#164655">${wEmail!=='0'?DAYS_PER_YEAR-total:'—'}</div><div style="font-size:12px;color:#6b8f96">Días restantes</div></div>
-  </div>
-  <table style="width:100%;border-collapse:collapse;font-size:14px"><thead><tr style="background:#f4f7f8">${wEmail!=='0'?'':`<th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b8f96">Trabajador</th>`}<th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b8f96">Inicio</th><th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b8f96">Fin</th><th style="padding:10px 12px;text-align:center;font-size:11px;text-transform:uppercase;color:#6b8f96">Días</th><th style="padding:10px 12px;font-size:11px;text-transform:uppercase;color:#6b8f96">Estado</th></tr></thead><tbody>${rows||'<tr><td colspan="5" style="padding:30px;text-align:center;color:#999">Sin registros</td></tr>'}</tbody></table>
-  </body></html>`;
-  const win=window.open('','_blank');win.document.write(html);win.document.close();setTimeout(()=>win.print(),400);
-}
-
-// ── INIT ─────────────────────────────────────────────────
-document.getElementById('workerModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeWorkerModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeWorkerModal();});
-document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-
-// Check for password reset token in URL
-const urlParams=new URLSearchParams(window.location.search);
-if(urlParams.get('action')==='verifyToken'&&urlParams.get('token')){
-  const email=urlParams.get('email'),token=urlParams.get('token');
-  fetch(WEB_APP_URL+'?'+new URLSearchParams({action:'verifyToken',email,token}))
-    .then(r=>r.json()).then(d=>{
-      if(d.ok){showForm('setPass');}
-      else{showErr('loginErr','Enlace inválido o expirado. Solicita uno nuevo.');showForm('login');}
-    });
-} else if(session?.token){
-  startApp();
+/* ====================================================================
+ *  HELPERS VARIOS
+ * ================================================================= */
+function cap(s) { return String(s || '').charAt(0).toUpperCase() + String(s || '').slice(1); }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function slug(s) { return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '_'); }
+// si el servidor responde "sesión no válida" -> forzamos logout
+function sessionExpired(r) {
+  if (r && r.error && /sesi/i.test(r.error)) { toast('Tu sesión ha caducado. Inicia sesión de nuevo.', 'bad'); logout(); return true; }
+  return false;
 }
 </script>
-
-
-</body></html>
+</body>
+</html>
